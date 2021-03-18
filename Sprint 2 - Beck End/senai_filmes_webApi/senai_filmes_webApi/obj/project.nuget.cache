@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "2bdLwDfjcgjTqb8UtAkwhT0JVepUMnr3VbYBGxUALE2d4VT0BmM81fIV2pfsDWIWopccd0fG/2ACwZrcBzAcJA==",
+  "dgSpecHash": "9PKshz9ugaIT5gdL7U/pVPHgTRbmTkaI5NHHIzIGQzhUXObyY6brXeN9y5qmA4Qp9jFr2CFZxqw3U8/JHAgvMA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\nilma\\Desktop\\SPRINT 2 - BECK END\\senai_filmes_webApi\\senai_filmes_webApi\\senai_filmes_webApi.csproj",
+  "projectFilePath": "C:\\Users\\nilma\\Desktop\\senai_sprint2_be\\Sprint 2 - Beck End\\senai_filmes_webApi\\senai_filmes_webApi\\senai_filmes_webApi.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

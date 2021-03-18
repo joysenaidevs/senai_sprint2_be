@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\nilma\\Desktop\\SPRINT 2 - BECK END\\senai_filmes_webApi\\senai_filmes_webApi\\senai_filmes_webApi.csproj",
+      "projectUniqueName": "C:\\Users\\nilma\\Desktop\\senai_sprint2_be\\Sprint 2 - Beck End\\senai_filmes_webApi\\senai_filmes_webApi\\senai_filmes_webApi.csproj",
       "projectName": "senai_filmes_webApi",
-      "projectPath": "C:\\Users\\nilma\\Desktop\\SPRINT 2 - BECK END\\senai_filmes_webApi\\senai_filmes_webApi\\senai_filmes_webApi.csproj",
+      "projectPath": "C:\\Users\\nilma\\Desktop\\senai_sprint2_be\\Sprint 2 - Beck End\\senai_filmes_webApi\\senai_filmes_webApi\\senai_filmes_webApi.csproj",
       "packagesPath": "C:\\Users\\nilma\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\nilma\\Desktop\\SPRINT 2 - BECK END\\senai_filmes_webApi\\senai_filmes_webApi\\obj\\",
+      "outputPath": "C:\\Users\\nilma\\Desktop\\senai_sprint2_be\\Sprint 2 - Beck End\\senai_filmes_webApi\\senai_filmes_webApi\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\nilma\\AppData\\Roaming\\NuGet\\NuGet.Config",

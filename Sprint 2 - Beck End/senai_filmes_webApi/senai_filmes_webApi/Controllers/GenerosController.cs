@@ -46,6 +46,7 @@ namespace senai_filmes_webApi.Controllers
         /// </summary>
         /// <returns>retorna uma lista de generos e um status code </returns>
         /// dominio 
+        /// http://localhost/api/generos
         [HttpGet]
         public IActionResult Get()
         {
@@ -56,6 +57,23 @@ namespace senai_filmes_webApi.Controllers
 
             // retorna o status code (Ok) com a lista de generos no formato JsonS
             return Ok (listaGeneros);
+        }
+
+        /// <summary>
+        /// cadastra um novo genero
+        /// </summary>
+        /// <param name="novoGenero">objeto novoGenero será recebido na requisição</param>
+        /// <returns>vamos retornar um status code 201</returns>
+        /// http://localhost5000/api/generos
+        [HttpPost]
+        
+        public IActionResult Post (GeneroDomain novoGenero)
+        {
+            //FAZ A CHAMADA PARA O METODO .CADASTRAR()
+            _generoRepository.Cadastrar(novoGenero);
+
+            //retorna um status code 201
+            return StatusCode(201);
         }
 
 

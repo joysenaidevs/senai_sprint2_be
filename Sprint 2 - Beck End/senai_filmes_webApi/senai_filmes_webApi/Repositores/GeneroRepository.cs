@@ -28,17 +28,105 @@ namespace senai_filmes_webApi.Repositores
 
         public void AtualizarIdCorpo(GeneroDomain genero)
         {
-            throw new NotImplementedException();
+            using (SqlConnection con = new SqlConnection(stringConexao))
+            {
+                string queryUpdateIdBody = "UPDATE Generos Set Nome = @Nome WHERE idGenero = @ID";
+                using (SqlCommand cmd = new SqlCommand(queryUpdateIdBody, con))
+                {
+                    // passando os valores para os parametros 
+                    cmd.Parameters.AddWithValue("@Nome", genero.nome);
+                    cmd.Parameters.AddWithValue("@ID", genero.idGenero);
+
+                    // abre a conexao com o banco de dados
+                    con.Open();
+
+                    // executa o comando
+                    cmd.ExecuteNonQuery();
+                }
+            }
         }
 
+        /// <summary>
+        /// atualiza o genero passando o id pela url
+        /// </summary>
+        /// <param name="id">id do genero que sera atualizado</param>
+        /// <param name="genero">objeto genero com as novas informaçoes</param>
         public void AtualizarIdUrl(int id, GeneroDomain genero)
         {
-            throw new NotImplementedException();
+            using (SqlConnection con = new SqlConnection(stringConexao))
+            {
+                // Declara a query a ser executada
+                string queryUpdateUrl = "UPDATE Generos SET Nome = @Nome WHERE idGenem ro = @ID";
+
+                // declaramos sqlcommand passando a query q sera executada e a conexao com o parametro
+                using (SqlCommand cmd = new SqlCommand(queryUpdateUrl, con))
+                {
+                    //passa os valors para os parametros 
+                    cmd.Parameters.AddWithValue("@", id);
+                    cmd.Parameters.AddWithValue("@Nome", genero.nome);
+
+                    con.Open();
+
+                    //executa o comando
+                    cmd.ExecuteNonQuery();
+                }
+            }
         }
+
+        /// <summary>
+        /// busca um genero através do seu id
+        /// </summary>
+        /// <param name="id">id do genero que será buscado</param>
+        /// <returns>um genero buscado ou null caso não seja encontrado</returns>
 
         public GeneroDomain BuscarPorId(int id)
         {
-            throw new NotImplementedException();
+            using (SqlConnection con = new  SqlConnection(stringConexao))
+            {
+                // declara a query a ser executada 
+                string querySelectById = "SELECT idGenero, Nome FROM Generos WHERE idGenero = @ID";
+
+                con.Open();
+
+                // receber os valores do banco de ddadods 
+                SqlDataReader rdr;
+
+                // declara a SqlCommand cmd passando a query q sera executada e a conexao como parametros
+                using (SqlCommand cmd = new SqlCommand(querySelectById, con))
+                {
+                    // passar o valor para o parametro @ID
+                    cmd.Parameters.AddWithValue("@ID", id);
+
+                    // ler no banco de ddados através do cmd e o que voltar armazena os dados no rdr
+                    rdr = cmd.ExecuteReader();
+
+                    // verifica o resultado da query retornou algum registro
+                    if(rdr.Read())
+                    {
+                        // se sim instancia um novo objeto generoBuscado do tipo GeneroDomain
+                        GeneroDomain generoBuscado = new GeneroDomain
+                        {
+                            // atribui à propiedade idGenero o valor da coluna "idGenero" da tabela do banco de dados
+                            idGenero = Convert.ToInt32(rdr["idGenero"]),
+
+                            // atribui a propiedade nome o valor da coluna "Nome" da tabela do banco de dados
+                            nome = rdr["Nome"].ToString()
+                        };
+
+                        // retorna o generoBuscado com os dados obtidos
+                        return generoBuscado;
+
+                    }
+
+                    // se não , retorna null
+                    return null;
+
+
+                }
+
+                
+            }
+
         }
 
         /// <summary>
@@ -51,13 +139,28 @@ namespace senai_filmes_webApi.Repositores
             // Declara a SqlConnection con passando a string de conexão como parâmetro
             using (SqlConnection con = new SqlConnection(stringConexao))
             {
+              
+                // Será enviado para o banco  INSERT INTO Generos(Nome) VALUES ('Aventura');
+                //                    INSERT INTO Generos(Nome) VALUES('Ficção Cientifica ');
+                //                    INSERT INTO Generos(Nome) VALUES('Joana D'Arc ');
+                //                    INSERT INTO Generos(Nome) VALUES('Ficção Cientifica ');
+                //                    INSERT INTO Generos(Nome) VALUES(' ') DROP TABLE Filmes--);
+                //string queryInsert  INSERT INTO Generos(Nome) VALUES('"+ novoGenero.nome"') )";
+                // nao usar dessa forma pois pode causar o efeito Joana D'Arc
+                // Além de permitir SQL Injection
+                // Por exemplo:
+                // "nome" : "') DROP TABLE Filmes--"
+                // ao tentar cadastrar o comando acima irá deletar a tabela Filmes do banco de dados
+                //string queryInsert = "INSERT INTO Generos(Nome) VALUES(' " + novoGenero.nome + " ')";
+
                 // Declarando a query que sera executada 
-              // Será enviado para o banco  INSERT INTO Generos(Nome) VALUES ('Aventura');
-                string queryInsert = "INSERT INTO Generos(Nome) VALUES(' " + novoGenero.nome + " ')";
+                string queryInsert = "INSERT INTO Generos(Nome) VALUES(@Nome)";
 
                 // enviar a informação para ser cadastrada
                 using (SqlCommand cmd = new SqlCommand(queryInsert, con))
                 {
+                    // Passa o valor para o  parametro @Nome
+                    cmd.Parameters.AddWithValue("@Nome", novoGenero.nome);
                     // abre a conexao com o banco de dados
                     con.Open();
 
@@ -67,9 +170,31 @@ namespace senai_filmes_webApi.Repositores
             }
         }
 
+        /// <summary>
+        /// Deleta o genero atraves do seu id
+        /// </summary>
+        /// <param name="id">id do genero que será deletado</param>
         public void Deletar(int id)
         {
-            throw new NotImplementedException();
+            // declara a SqlConnection con passando a string de conexao como parametro 
+            using (SqlConnection con = new SqlConnection(stringConexao))
+            {
+                // declara a query a ser executada passando valor como parametro, no caso o ID
+                string queryDelete = "DELETE FROM Generos WHERE idGenero = @ID";
+
+                // declara o sqlCommand cmd passando a query que será executada e a execucao como parametros
+                using (SqlCommand cmd = new SqlCommand(queryDelete, con))
+                {
+                    // define o valor recebido  no método como o valor do parametro ID
+                    cmd.Parameters.AddWithValue("@ID", id);
+
+                    //abre a conexao com os dadods
+                    con.Open();
+
+                    // executa o comando
+                    cmd.ExecuteNonQuery();
+                }
+            }
         }
         // fim deletar
 
@@ -132,6 +257,6 @@ namespace senai_filmes_webApi.Repositores
                 // retorna a lista de generos  - retornar resultado antes do metódo fechar {}S
                 return listaGeneros; 
         }
-        //fim listar
+        //fim listarF
     }
 }

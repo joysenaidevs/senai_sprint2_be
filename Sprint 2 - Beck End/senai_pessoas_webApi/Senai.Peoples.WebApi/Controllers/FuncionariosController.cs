@@ -16,7 +16,7 @@ namespace Senai.Peoples.WebApi.Controllers
     // o tipo de resposta da API será no formato json
      [Produces("application/json")]
 
-    // http://localhost:5000/api/Funcionarios
+    // http://localhost:44336/api/Funcionarios
     [Route("api/[controller]")]
 
     // controlador API
@@ -26,7 +26,7 @@ namespace Senai.Peoples.WebApi.Controllers
         /// <summary>
         /// _funcionarioRepository = vai receber todos os metodos definidos na interface IFuncionarioRepository
         /// </summary>
-        private IFuncionarioRepository _funcionarioRepository { get; set; }
+        private IFuncionarioRepository  _funcionarioRepository { get; set; }
 
         public FuncionariosController()
         {
@@ -46,5 +46,68 @@ namespace Senai.Peoples.WebApi.Controllers
             return Ok(listaFuncionarios);
         }
 
+        //  https://localhost:44335/api/funcionarios/1
+        [HttpGet("{id}")]
+        public IActionResult GetById(int id)
+        {
+            FuncionarioDomain funcionarioBuscado = _funcionarioRepository.BuscarPorId(id);
+
+            //verifica se nenhum funcionario foi encontrado
+            if (funcionarioBuscado == null)
+            {
+                return NotFound("Este funcionario não consta no sistema!");
+            }
+
+            return Ok(funcionarioBuscado);
+        }
+
+        [HttpPut]
+        public IActionResult PutIdBody(FuncionarioDomain funcionarioAtualizado)
+        {
+            FuncionarioDomain funcionarioBuscado = _funcionarioRepository.BuscarPorId(funcionarioAtualizado.idFuncionario);
+
+            if (funcionarioBuscado != null)
+            {
+                try
+                {
+                    _funcionarioRepository.AtualizarIdCorpo(funcionarioAtualizado);
+
+                    return NoContent();
+                }
+                catch (Exception error)
+                {
+
+                    return BadRequest(error);
+                }
+            }
+
+            return NotFound
+                (
+                    new
+                    {
+                        
+                        mensagem = "Funcionario não identificado!"
+                    }
+                );
+        }
+
+        // https://localhost:44335/api/funcionarios
+        [HttpPost]
+        public IActionResult Post(FuncionarioDomain novoFuncionario)
+        {
+            _funcionarioRepository.Cadastrar(novoFuncionario);
+
+            return StatusCode(201);
+        }
+
+
+        [HttpDelete("{id}")]
+
+        public IActionResult Delete(int id)
+        {
+            _funcionarioRepository.Deletar(id);
+
+            return StatusCode(204);
+        }
     }
 }

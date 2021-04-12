@@ -135,9 +135,9 @@ namespace Senai.Peoples.WebApi.Repositories
                     {
                         FuncionarioDomain funcionario = new FuncionarioDomain()
                         {
-                            idFuncionario = Convert.ToInt32(rdr[0]),
-                            nome = rdr[1].ToString()
-
+                            idFuncionario = Convert.ToInt32(rdr["idFuncinario"])
+                            , nome = rdr["nome"].ToString()
+                            , sobreNome = rdr["sobrenome"].ToString()
                         };
 
 

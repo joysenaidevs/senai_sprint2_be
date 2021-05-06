@@ -5,6 +5,8 @@ using senai.hroads.webApi.Domains;
 
 #nullable disable
 
+// Scaffold-DbContext "Data Source=SERVIDOR; initial catalog= Inlock_games; user Id=sa; pwd=senai@132;" Microsoft.EntityFrameorkCore.SqlDerver - OutputDir Domains -ContextDir Contexts -Context InlockContext
+
 namespace senai.hroads.webApi.Contexts
 {
     public partial class HroadsContext : DbContext

@@ -84,7 +84,7 @@ namespace senai.hroads.webApi.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpDelete("{id}"]
+        [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
             // faz a chamad apara o método

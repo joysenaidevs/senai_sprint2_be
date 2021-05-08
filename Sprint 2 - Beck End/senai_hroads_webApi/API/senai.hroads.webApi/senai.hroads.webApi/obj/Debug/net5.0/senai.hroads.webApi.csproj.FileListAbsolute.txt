@@ -56,3 +56,12 @@ C:\Users\Matheus\Desktop\SENAI\senai_sprint2_backend\Exercícios\HROADS\backend\
 C:\Users\Matheus\Desktop\SENAI\senai_sprint2_backend\Exercícios\HROADS\backend\senai.hroads.webApi\senai.hroads.webApi\obj\Debug\net5.0\ref\senai.hroads.webApi.dll
 C:\Users\Matheus\Desktop\SENAI\senai_sprint2_backend\Exercícios\HROADS\backend\senai.hroads.webApi\senai.hroads.webApi\obj\Debug\net5.0\senai.hroads.webApi.pdb
 C:\Users\Matheus\Desktop\SENAI\senai_sprint2_backend\Exercícios\HROADS\backend\senai.hroads.webApi\senai.hroads.webApi\obj\Debug\net5.0\senai.hroads.webApi.genruntimeconfig.cache
+C:\Users\Neide\Desktop\senai_sprint2_be\Sprint 2 - Beck End\senai_hroads_webApi\API\senai.hroads.webApi\senai.hroads.webApi\obj\Debug\net5.0\senai.hroads.webApi.csprojAssemblyReference.cache
+C:\Users\Neide\Desktop\senai_sprint2_be\Sprint 2 - Beck End\senai_hroads_webApi\API\senai.hroads.webApi\senai.hroads.webApi\obj\Debug\net5.0\senai.hroads.webApi.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Neide\Desktop\senai_sprint2_be\Sprint 2 - Beck End\senai_hroads_webApi\API\senai.hroads.webApi\senai.hroads.webApi\obj\Debug\net5.0\senai.hroads.webApi.AssemblyInfoInputs.cache
+C:\Users\Neide\Desktop\senai_sprint2_be\Sprint 2 - Beck End\senai_hroads_webApi\API\senai.hroads.webApi\senai.hroads.webApi\obj\Debug\net5.0\senai.hroads.webApi.AssemblyInfo.cs
+C:\Users\Neide\Desktop\senai_sprint2_be\Sprint 2 - Beck End\senai_hroads_webApi\API\senai.hroads.webApi\senai.hroads.webApi\obj\Debug\net5.0\senai.hroads.webApi.csproj.CoreCompileInputs.cache
+C:\Users\Neide\Desktop\senai_sprint2_be\Sprint 2 - Beck End\senai_hroads_webApi\API\senai.hroads.webApi\senai.hroads.webApi\obj\Debug\net5.0\senai.hroads.webApi.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Neide\Desktop\senai_sprint2_be\Sprint 2 - Beck End\senai_hroads_webApi\API\senai.hroads.webApi\senai.hroads.webApi\obj\Debug\net5.0\senai.hroads.webApi.dll
+C:\Users\Neide\Desktop\senai_sprint2_be\Sprint 2 - Beck End\senai_hroads_webApi\API\senai.hroads.webApi\senai.hroads.webApi\obj\Debug\net5.0\ref\senai.hroads.webApi.dll
+C:\Users\Neide\Desktop\senai_sprint2_be\Sprint 2 - Beck End\senai_hroads_webApi\API\senai.hroads.webApi\senai.hroads.webApi\obj\Debug\net5.0\senai.hroads.webApi.pdb

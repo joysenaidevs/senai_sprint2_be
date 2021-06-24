@@ -92,6 +92,7 @@ namespace senai_gufi_webApi
                         ValidAudience = "gufi.webApi"
                     };
                 });
+                
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

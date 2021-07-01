@@ -6,7 +6,28 @@ using senai_spmedical_be_webApi.Domains;
 #nullable disable
 //   Comando DataBase
 //          Scaffold-DbContext "Data Source=; initial catalog=; user Id=sa; pwd="adm@132;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Domains -Contexts -Context MedicalContext (MedicalContext.cs)
-// Comando:                     string de conexão                                           Provedor              nome da pasta onde ficarão os domains          Nome da classe MedicalContext           
+// Comando:                     string de conexão                                           Provedor              nome da pasta onde ficarão os domains          Nome da classe MedicalContext
+// 
+// Documentação EF Core
+// https://docs.microsoft.com/pt-br/ef/core/managing-schemas/scaffolding
+
+/*
+    Dependências do EF Core
+    Microsoft.EntityFrameworkCore.SqlServer
+    Microsoft.EntityFrameworkCore.SqlServer.Design
+    Microsoft.EntityFrameworkCore.Tools
+*/
+
+// Scaffold-DbContext "Data Source=DESKTOP-SP7RV1S\SQLEXPRESS; initial catalog=Gufi_manha; user Id=sa; pwd=senai@132;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Domains -ContextDir Contexts -Context GufiContext
+
+// Comando:                                 Scaffold-DbContext
+// String de conexão:                       "Data Source=DESKTOP-SP7RV1S\SQLEXPRESS; initial catalog=Gufi_manha; user Id=sa; pwd=senai@132;"
+// Provedor utilizado:                      Microsoft.EntityFrameworkCore.SqlServer
+// Nome da pasta onde ficarão os domínios:  -OutputDir Domains
+// Nome da pasta onde ficarão os contextos: -ContextDir Contexts
+// Nome do arquivo/classe de contexto:      -Context GufiContext
+
+
 namespace senai_spmedical_be_webApi.Contexts
 {
     public partial class MedicalContext : DbContext
@@ -33,7 +54,13 @@ namespace senai_spmedical_be_webApi.Contexts
             if (!optionsBuilder.IsConfigured)
             {
                 //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Data Source=WINDOWS\\SQLEXPRESS; initial catalog=medicalGroup; user Id=sa; pwd=adm@132;");
+
+                //string de conexao Joyce
+                //optionsBuilder.UseSqlServer("Data Source=WINDOWS\\SQLEXPRESS; initial catalog=medicalGroup; user Id=sa; pwd=adm@132;");
+
+
+                //string de conexao do senai
+                optionsBuilder.UseSqlServer("Data Source=LAB08DESK115999\\SQLEXPRESS; initial catalog=medicalGroup; integrated security=true");
             }
         }
 

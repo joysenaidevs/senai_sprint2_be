@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +19,19 @@ namespace senai_spmedical_be_webApi
         {
             //adicionando um serivco para permitir a leitura dos controllers
             // define o uso de controllers
-            services.AddControllers();
+
+            services
+                //Adiciona o service controllers
+                .AddControllers()
+
+                .AddNewtonsoftJson(options => {
+                    //Igonora os loopings
+                    options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+
+                    // ignoramos valores nullos (principalmente para junç~ão)
+                    options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
+
+                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

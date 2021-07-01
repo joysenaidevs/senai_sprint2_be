@@ -28,6 +28,8 @@ namespace senai_spmedical_be_webApi.Repositories
         {
             // retorna clinicas para o ID informado
             return ctx.Clinicas.FirstOrDefault(e => e.IdClinica == id);
+
+
             //    try
             //    {
             //        // Retora a resposta da requisição fazendo a chamada para o método

@@ -5,6 +5,7 @@ using senai_spmedical_be_webApi.Interfaces;
 using senai_spmedical_be_webApi.Repositories;
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -139,7 +140,7 @@ namespace senai_spmedical_be_webApi.Controllers
         /// <summary>
         /// Deleta uma consulta 
         /// </summary>
-        /// <param name="id">od da consulta q sera deletada</param>
+        /// <param name="id">id da consulta q sera deletada</param>
         /// <returns>um statuscode 204</returns>
         [HttpDelete("{id}")]
         public IActionResult Del (int id)
@@ -158,6 +159,33 @@ namespace senai_spmedical_be_webApi.Controllers
             {
                 // retorna um status code 400
                 return BadRequest(ex);
+            }
+        }
+
+
+        /// <summary>
+        /// Lista as consultas relacionadas com o id de quem estiver logado (médico ou paciente) 
+        /// </summary>
+        /// <returns>Uma lista das consultas e um StatusCode 200 - Ok</returns>
+        //[Authorize(Roles = "2,3")]
+        [HttpGet("Minhas")]
+        public IActionResult GetMy()
+        {
+            try
+            {
+                int idUsuario = Convert.ToInt32(HttpContext.User.Claims.First(c => c.Type == JwtRegisteredClaimNames.Jti).Value);
+
+                return Ok(__consultasRepository.ListarMinhas(idUsuario));
+
+
+            }
+            catch (Exception erro)
+            {
+                return BadRequest(new
+                {
+                    mensagem = "Não é possível mostrar as consultas se o usuário não estiver logado!",
+                    erro
+                });
             }
         }
     }

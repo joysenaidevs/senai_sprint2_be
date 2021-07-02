@@ -19,7 +19,7 @@ namespace senai_spmedical_be_webApi.Repositories
         {
             // criamos um objeto e chamamos o método BuscarPorId 
             //busca uma consulta através do seu id
-            Consulta consultaBuscada = BuscarPorId(id);
+            Consulta buscarConsulta = BuscarPorId(id);
 
             //verifica se a consulta foi informada
             if (consultaUpdate.Situacao != null)
@@ -104,7 +104,26 @@ namespace senai_spmedical_be_webApi.Repositories
 
         public List<Consulta> ListarMinhas(int id)
         {
-            throw new NotImplementedException();
+            // listar todas as consultas
+            // return ctx.Consultas.ToList();
+
+            return ctx.Consultas
+                // adiciona na busca as informações da consulta que o paciente vai agendar
+                .Include(c => c.IdProntuarioNavigation)
+
+                // adiciona na busca as informações da consula que o medico vai realizar
+                .Include(c => c.IdMedicoNavigation)
+
+                //Adiciona na busca o Medico e a sua especialidade
+                .Include(c => c.IdMedicoNavigation.IdEspecialidade)
+
+                // adiciona na busca o prontuario e a consulta 
+                .Include(c => c.IdProntuarioNavigation.Consulta)
+
+                // Estabelece como parâmetro de consulta o ID do usuário recebido
+                .Where(c => c.IdProntuario == id)
+                .ToList();
+
         }
     }
 }

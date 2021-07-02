@@ -9,7 +9,7 @@ namespace senai_spmedical_be_webApi.Interfaces
     interface IUsuarioRepository
     {
 
-        // <summary>
+        /// <summary>
         /// Lista todos os usuários
         /// </summary>
         /// <returns>Uma lista de usuários</returns>
@@ -32,7 +32,7 @@ namespace senai_spmedical_be_webApi.Interfaces
         /// Atualiza um usuário existente
         /// </summary>
         /// <param name="id">ID do usuário que será atualizado</param>
-        /// <param name="usuarioAtualizado">Objeto com as novas informações</param>
+        /// <param name="usuarioUpdate">Objeto com as novas informações</param>
         void Atualizar(int id, Usuario usuarioUpdate);
 
         /// <summary>

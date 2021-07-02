@@ -68,6 +68,80 @@
             <param name="id">id da consulta q sera deletada</param>
             <returns>um statuscode 204</returns>
         </member>
+        <member name="M:senai_spmedical_be_webApi.Controllers.ConsultasController.GetMy">
+            <summary>
+            Lista as consultas relacionadas com o id de quem estiver logado (médico ou paciente) 
+            </summary>
+            <returns>Uma lista das consultas e um StatusCode 200 - Ok</returns>
+        </member>
+        <member name="M:senai_spmedical_be_webApi.Controllers.ConsultasController.GetAgenda">
+            <summary>
+            Lista a agenda do medico
+            </summary>
+            <returns>retorna uma lista de agenda e um StatusCode 200</returns>
+        </member>
+        <member name="T:senai_spmedical_be_webApi.Controllers.LoginController">
+            <summary>
+            Controller responsável pelos endpoints (URLs) referentes aos Logins
+            </summary>
+            
+        </member>
+        <member name="P:senai_spmedical_be_webApi.Controllers.LoginController._usuarioRepository">
+            <summary>
+            Objeto _usuarioRepository que irá receber todos os métodos definidos na interface IuUsuarioRepository
+            </summary>
+        </member>
+        <member name="M:senai_spmedical_be_webApi.Controllers.LoginController.Login(senai_spmedical_be_webApi.LoginViewModels.LoginViewModel)">
+            <summary>
+            Valida o usuario
+            </summary>
+            <param name="login">objeto com email e senha</param>
+            <returns>retorna</returns>
+        </member>
+        <member name="T:senai_spmedical_be_webApi.Controllers.UsuariosController">
+            <summary>
+            Controller responsável pelos endpoints (URLs) referentes aos usuários
+            </summary>
+            
+        </member>
+        <member name="P:senai_spmedical_be_webApi.Controllers.UsuariosController._usuarioRepository">
+            <summary>
+            Objeto _usuarioRepository que irá receber todos os métodos definidos na interface IuUsuarioRepository
+            </summary>
+        </member>
+        <member name="M:senai_spmedical_be_webApi.Controllers.UsuariosController.#ctor">
+            <summary>
+            Instancia o objeto _usuarioRepository para que haja a referência aos métodos no repositório
+            </summary>
+        </member>
+        <member name="M:senai_spmedical_be_webApi.Controllers.UsuariosController.Get">
+            <summary>
+            Lista todos os usuários
+            </summary>
+            <returns>Uma lista de usuários e um status code 200 - Ok</returns>
+        </member>
+        <member name="M:senai_spmedical_be_webApi.Controllers.UsuariosController.Post(senai_spmedical_be_webApi.Domains.Usuario)">
+            <summary>
+            Cadastra um novo usuário
+            </summary>
+            <param name="novoUsuario">Objeto novoUsuario que será cadastrado</param>
+            <returns>Um status code 201 - Created</returns>
+        </member>
+        <member name="M:senai_spmedical_be_webApi.Controllers.UsuariosController.Put(System.Int32,senai_spmedical_be_webApi.Domains.Usuario)">
+            <summary>
+            Atualiza um usuário existente
+            </summary>
+            <param name="id">ID do usuário que será atualizado</param>
+            <param name="usuarioAtualizado">Objeto com as novas informações</param>
+            <returns>Um status code 204 - No Content</returns>
+        </member>
+        <member name="M:senai_spmedical_be_webApi.Controllers.UsuariosController.Delete(System.Int32)">
+            <summary>
+            Deleta um usuário existente
+            </summary>
+            <param name="id">Id do usuário a ser deletado</param>
+            <returns>Um StatusCode 204 - No Content</returns>
+        </member>
         <member name="T:senai_spmedical_be_webApi.Interfaces.IClinicaRepository">
             <summary>
             Interface responsavel pelas ClinicasRepository
@@ -112,7 +186,71 @@
             <returns>Uma lista de clinicas com seus medicos</returns>
             metódo a parte, relacionando duas entidades ou mais
         </member>
-        <!-- Badly formed XML comment ignored for member "M:senai_spmedical_be_webApi.Interfaces.IUsuarioRepository.Listar" -->
+        <member name="M:senai_spmedical_be_webApi.Interfaces.IConsultaRepository.Cadastrar(senai_spmedical_be_webApi.Domains.Consulta)">
+            <summary>
+            Cadastra uma nova consulta
+            </summary>
+            <param name="novaConsulta">objeto novaConsulta cadastrada</param>
+        </member>
+        <member name="M:senai_spmedical_be_webApi.Interfaces.IConsultaRepository.Listar">
+            <summary>
+            Listar uma consulta
+            </summary>
+            <returns>uma lista de consultas</returns>
+        </member>
+        <member name="M:senai_spmedical_be_webApi.Interfaces.IConsultaRepository.BuscarPorId(System.Int32)">
+            <summary>
+            Buscar consulta através do seu id
+            </summary>
+            <param name="id">id da consulta buscada</param>
+            <returns></returns>
+        </member>
+        <member name="M:senai_spmedical_be_webApi.Interfaces.IConsultaRepository.Atualizar(System.Int32,senai_spmedical_be_webApi.Domains.Consulta)">
+            <summary>
+            Atualiza uma consulta existente
+            </summary>
+            <param name="id"></param>
+            <param name="consultaUpdate"></param>
+        </member>
+        <member name="M:senai_spmedical_be_webApi.Interfaces.IConsultaRepository.Deletar(System.Int32)">
+            <summary>
+            Deleta uma consulta existente
+            </summary>
+            <param name="id">id da consulta deletada</param>
+        </member>
+        <member name="M:senai_spmedical_be_webApi.Interfaces.IConsultaRepository.ListarMinhas(System.Int32)">
+            <summary>
+            Listar todas as consultas de um determnado paciente
+            </summary>
+            <param name="id">id do usuario que faz a consulta</param>
+            <returns>retorna uma lista de consultas</returns>
+        </member>
+        <member name="M:senai_spmedical_be_webApi.Interfaces.IConsultaRepository.ListarAgenda(System.Int32)">
+            <summary>
+            Lista a agenda do admnistrador
+            </summary>
+            <param name="id">objeto com as informacoes</param>
+            <returns>retorna uma  lista de agendas</returns>
+        </member>
+        <member name="M:senai_spmedical_be_webApi.Interfaces.IConsultaRepository.MinhasConsultas(senai_spmedical_be_webApi.Domains.Consulta)">
+            <summary>
+            cria uma nova consulta
+            </summary>
+            <param name="minhaConsulta"></param>
+        </member>
+        <member name="M:senai_spmedical_be_webApi.Interfaces.IConsultaRepository.AtualizarStatus(System.Int32,System.String)">
+            <summary>
+            Altera o status da consulta
+            </summary>
+            <param name="id">id da consulta que tera a situacao alterada</param>
+            <param name="status">Parâmetro que atualiza o situação da consulta para 1 - Agendada, 2 - Cancelada </param>
+        </member>
+        <member name="M:senai_spmedical_be_webApi.Interfaces.IUsuarioRepository.Listar">
+            <summary>
+            Lista todos os usuários
+            </summary>
+            <returns>Uma lista de usuários</returns>
+        </member>
         <member name="M:senai_spmedical_be_webApi.Interfaces.IUsuarioRepository.BuscarPorId(System.Int32)">
             <summary>
             Busca um usuário através do ID
@@ -131,7 +269,7 @@
             Atualiza um usuário existente
             </summary>
             <param name="id">ID do usuário que será atualizado</param>
-            <param name="usuarioAtualizado">Objeto com as novas informações</param>
+            <param name="usuarioUpdate">Objeto com as novas informações</param>
         </member>
         <member name="M:senai_spmedical_be_webApi.Interfaces.IUsuarioRepository.Deletar(System.Int32)">
             <summary>
@@ -146,6 +284,11 @@
             <param name="email">e-mail do usuário</param>
             <param name="senha">senha do usuário</param>
             <returns>Um objeto do tipo Usuario que foi buscado</returns>ns>
+        </member>
+        <member name="T:senai_spmedical_be_webApi.LoginViewModels.LoginViewModel">
+            <summary>
+            Classe responsavel pelo modelo de Login
+            </summary>
         </member>
         <member name="T:senai_spmedical_be_webApi.Repositories.ClinicaRepository">
             <summary>
@@ -192,6 +335,32 @@
             Lista todas as consultas
             </summary>
             <returns>Uma Lista das consultas</returns>
+        </member>
+        <member name="M:senai_spmedical_be_webApi.Repositories.UsuarioRepository.Cadastrar(senai_spmedical_be_webApi.Domains.Usuario)">
+            <summary>
+            Cadastra um novo usuário
+            </summary>
+            <param name="novoUsuario">Objeto novoUsuario que será cadastrado</param>
+        </member>
+        <member name="M:senai_spmedical_be_webApi.Repositories.UsuarioRepository.Deletar(System.Int32)">
+            <summary>
+            Deleta um usuário existente
+            </summary>
+            <param name="id">ID do usuário que será deletado</param>
+        </member>
+        <member name="M:senai_spmedical_be_webApi.Repositories.UsuarioRepository.Listar">
+            <summary>
+            Lista todos os usuários
+            </summary>
+            <returns>Uma lista de usuários</returns>
+        </member>
+        <member name="M:senai_spmedical_be_webApi.Repositories.UsuarioRepository.Login(System.String,System.String)">
+            <summary>
+            Valida o usuário
+            </summary>
+            <param name="email">e-mail do usuário</param>
+            <param name="senha">senha do usuário</param>
+            <returns>Um objeto do tipo Usuario que foi buscado</returns>ns>
         </member>
     </members>
 </doc>

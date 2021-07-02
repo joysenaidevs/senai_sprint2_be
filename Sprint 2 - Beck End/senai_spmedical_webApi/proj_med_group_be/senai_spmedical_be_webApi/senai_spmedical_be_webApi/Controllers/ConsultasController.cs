@@ -10,10 +10,10 @@ using System.Linq;
 using System.Threading.Tasks;
 
 
-/// <summary>
-/// controlador responsavel pelas consultas e seus endpoints (urls)
-/// </summary>
-/// 
+        // <summary>
+        // controlador responsavel pelas consultas e seus endpoints (urls)
+        // </summary>
+        //
 
 namespace senai_spmedical_be_webApi.Controllers
 {
@@ -175,9 +175,7 @@ namespace senai_spmedical_be_webApi.Controllers
             {
                 int idUsuario = Convert.ToInt32(HttpContext.User.Claims.First(c => c.Type == JwtRegisteredClaimNames.Jti).Value);
 
-                return Ok(__consultasRepository.ListarMinhas(idUsuario));
-
-
+                return Ok(_consultasRepository.ListarMinhas(idUsuario));
             }
             catch (Exception erro)
             {
@@ -185,6 +183,30 @@ namespace senai_spmedical_be_webApi.Controllers
                 {
                     mensagem = "Não é possível mostrar as consultas se o usuário não estiver logado!",
                     erro
+                });
+            }
+        }
+
+        /// <summary>
+        /// Lista a agenda do medico
+        /// </summary>
+        /// <returns>retorna uma lista de agenda e um StatusCode 200</returns>
+        [HttpGet("Agenda")]
+        public IActionResult GetAgenda()
+        {
+            try
+            {
+                int idUsuario = Convert.ToInt32(HttpContext.User.Claims.First(c => c.Type == JwtRegisteredClaimNames.Jti).Value);
+
+                return Ok(_consultasRepository.ListarAgenda(idUsuario));
+                
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new
+                {
+                    mensagem = "Não é possível mostrar a agenda se o usuário não estiver logado!",
+                    ex
                 });
             }
         }

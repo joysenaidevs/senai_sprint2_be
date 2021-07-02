@@ -76,6 +76,8 @@ namespace senai_spmedical_be_webApi.Repositories
         }
 
 
+
+
         /// <summary>
         /// Valida o usuário
         /// </summary>

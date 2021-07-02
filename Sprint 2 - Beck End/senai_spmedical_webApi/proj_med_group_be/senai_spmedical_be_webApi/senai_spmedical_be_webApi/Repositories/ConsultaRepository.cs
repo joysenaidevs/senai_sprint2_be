@@ -19,12 +19,12 @@ namespace senai_spmedical_be_webApi.Repositories
         {
             // criamos um objeto e chamamos o método BuscarPorId 
             //busca uma consulta através do seu id
-            Consulta buscarConsulta = BuscarPorId(id);
+            //Consulta buscarConsulta = BuscarPorId(id);
 
             //verifica se a consulta foi informada
             if (consultaUpdate.Situacao != null)
             {
-                /// atribui novos valores
+                // atribui novos valores
                 consultaUpdate.Situacao = consultaUpdate.Situacao;
             }
 
@@ -33,6 +33,11 @@ namespace senai_spmedical_be_webApi.Repositories
 
             // salva as informaçoes no banco de dados
             ctx.SaveChanges();
+        }
+
+        public void AtualizarStatus(int id, string status)
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>
@@ -97,7 +102,44 @@ namespace senai_spmedical_be_webApi.Repositories
 
         public List<Consulta> ListarAgenda(int id)
         {
-            return ctx.Consultas.Include(consulta => consulta.IdProntuario).ToList();
+            return ctx.Consultas
+                //busca as informações da consulta que o paciente vai agendar
+                .Include(c => c.IdProntuarioNavigation)
+
+                // busca as informacoes do medico que vai realizar a consulta
+                .Include(c => c.IdMedicoNavigation)
+
+                .Include(c => c.IdMedicoNavigation.IdEspecialidadeNavigation)
+
+                .Include(c => c.IdMedicoNavigation.Consulta)
+
+                // Estabelece como parâmetro de consulta o ID do usuário recebido
+                .Where(c => c.IdProntuarioNavigation.IdUsuario == id ||  c.IdMedicoNavigation.IdUsuario == id)
+
+                .Select(c => new Consulta
+                {
+                    IdConsulta = c.IdConsulta,
+                    DataConsulta = c.DataConsulta,
+                    Situacao = c.Situacao,
+
+                    IdProntuarioNavigation = new Prontuario
+                    {
+                        IdProntuario = c.IdProntuarioNavigation.IdProntuario,
+                        IdUsuario = c.IdProntuarioNavigation.IdUsuario,
+                        NomeProntuario = c.IdProntuarioNavigation.NomeProntuario,
+                    },
+
+                    IdMedicoNavigation = new Medico
+                    {
+                        IdMedico = c.IdMedicoNavigation.IdMedico,
+                        IdUsuario = c.IdMedicoNavigation.IdUsuario,
+                        NomeMedico = c.IdMedicoNavigation.NomeMedico,
+                        IdEspecialidade = c.IdMedicoNavigation.IdEspecialidadeNavigation.IdEspecialidade
+                    }
+                })
+
+            .Where(c => c.IdProntuarioNavigation.IdUsuario == id || c.IdMedicoNavigation.IdUsuario == id)
+            .ToList();
 
             //return ctx.Consultas.FirstOrDefault(consulta => consulta.IdConsulta == id);
         }
@@ -108,22 +150,26 @@ namespace senai_spmedical_be_webApi.Repositories
             // return ctx.Consultas.ToList();
 
             return ctx.Consultas
-                // adiciona na busca as informações da consulta que o paciente vai agendar
-                .Include(c => c.IdProntuarioNavigation)
+            // adiciona na busca as informações da consulta que o paciente vai agendar
+            .Include(c => c.IdProntuarioNavigation)
 
-                // adiciona na busca as informações da consula que o medico vai realizar
-                .Include(c => c.IdMedicoNavigation)
+            // adiciona na busca as informações da consula que o medico vai realizar
+            .Include(c => c.IdMedicoNavigation)
 
-                //Adiciona na busca o Medico e a sua especialidade
-                .Include(c => c.IdMedicoNavigation.IdEspecialidade)
+            //Adiciona na busca o Medico e a sua especialidade
+            .Include(c => c.IdMedicoNavigation.IdEspecialidade)
 
-                // adiciona na busca o prontuario e a consulta 
-                .Include(c => c.IdProntuarioNavigation.Consulta)
+            // Estabelece como parâmetro de consulta o ID do usuário recebido
+            .Where(c => c.IdProntuarioNavigation.IdUsuario == id)
 
-                // Estabelece como parâmetro de consulta o ID do usuário recebido
-                .Where(c => c.IdProntuario == id)
-                .ToList();
+            .Where(c => c.IdProntuarioNavigation.IdUsuario == id || c.IdMedicoNavigation.IdUsuario == id)
 
+            .ToList();
+        }
+
+        public void MinhasConsultas(Consulta minhaConsulta)
+        {
+            throw new NotImplementedException();
         }
     }
 }

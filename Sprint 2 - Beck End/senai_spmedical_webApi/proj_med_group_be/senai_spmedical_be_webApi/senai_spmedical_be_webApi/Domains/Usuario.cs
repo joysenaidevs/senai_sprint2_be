@@ -21,7 +21,7 @@ namespace senai_spmedical_be_webApi.Domains
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Informe a senha do usuário!")]
-        [StringLength(50, MinimumLength = 5, ErrorMessage ="Ao Cadastrar um usuario, a senha deverá ter de 5 a 50 caracteres")]
+        [StringLength(9, MinimumLength = 4, ErrorMessage ="Ao Cadastrar um usuario, a senha deverá ter de 3 a 6 caracteres")]
         public string Senha { get; set; }
 
         public virtual TipoUsuario IdTipoUsuarioNavigation { get; set; }

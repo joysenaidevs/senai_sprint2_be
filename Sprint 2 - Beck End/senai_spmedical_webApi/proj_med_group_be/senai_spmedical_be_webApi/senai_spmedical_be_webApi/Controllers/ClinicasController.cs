@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using senai_spmedical_be_webApi.Domains;
 using senai_spmedical_be_webApi.Interfaces;
@@ -24,6 +25,8 @@ namespace senai_spmedical_be_webApi.Controllers
 
     // Define que é um controlador de API
     [ApiController]
+
+    //[Authorize(Roles ="1")]
     public class ClinicasController : ControllerBase
     {
         /// <summary>
@@ -46,6 +49,7 @@ namespace senai_spmedical_be_webApi.Controllers
         /// </summary>
         /// <returns>retorna uma lista de clinicas e um status code 200</returns>
         /// http://localhost:5000/api/clinicas
+        //[Authorize(Roles = "1")]
         [HttpGet]
         public IActionResult Get()
         {

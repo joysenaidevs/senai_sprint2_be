@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using senai_spmedical_be_webApi.Domains;
 using senai_spmedical_be_webApi.Interfaces;
@@ -20,7 +21,7 @@ namespace senai_spmedical_be_webApi.Controllers
     [Produces("application/json")]
 
     // define a rota da api 
-    // ex: http://localhost:5000/api/tiposusuarios
+    // ex: http://localhost:5000/api/tiposusuario
     [Route("api/[controller]")]
 
     //controlador de api
@@ -45,7 +46,7 @@ namespace senai_spmedical_be_webApi.Controllers
         /// </summary>
         /// <param name="novoTipoUsuario">Objeto novoTipo a ser cadastrado</param>
         /// <returns>Um StatusCode 201 - Created</returns>
-        //[Authorize(Roles = "1")]
+        [Authorize(Roles = "1")]
         [HttpPost]
         public IActionResult Post(TipoUsuario novoTipoUsuario)
         {

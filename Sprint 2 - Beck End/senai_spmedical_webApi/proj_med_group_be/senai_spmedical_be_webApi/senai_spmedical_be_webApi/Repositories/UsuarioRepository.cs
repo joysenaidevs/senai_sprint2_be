@@ -47,7 +47,10 @@ namespace senai_spmedical_be_webApi.Repositories
             ctx.SaveChanges();
         }
 
-       
+        public Medico BuscarMedicoId(int id)
+        {
+            return ctx.Medicos.FirstOrDefault(u => u.IdUsuario == id);
+        }
 
         public Usuario BuscarPorId(int id)
         {
@@ -68,7 +71,12 @@ namespace senai_spmedical_be_webApi.Repositories
                .FirstOrDefault(u => u.IdUsuario == id);
         }
 
-       
+        public Prontuario BuscarProntuarioId(int id)
+        {
+            return ctx.Prontuarios.FirstOrDefault(u => u.IdUsuario == id);
+        }
+
+
 
         /// <summary>
         /// Cadastra um novo usuário
@@ -133,7 +141,8 @@ namespace senai_spmedical_be_webApi.Repositories
         /// <returns>Um objeto do tipo Usuario que foi buscado</returns>ns>
         public Usuario Login(string email, string senha)
         {
-            return ctx.Usuarios.FirstOrDefault(usuario => usuario.Email == email && usuario.Senha == senha);
+            // Retorna o usuário encontrado através do e-mail e da senha
+            return ctx.Usuarios.FirstOrDefault(u => u.Email == email && u.Senha == senha);
         }
     }
 

@@ -82,8 +82,8 @@ namespace senai_spmedical_be_webApi
                         // Define se o tempo de expiracao sera validado
                         ValidateLifetime = true,
 
-                        // Forma de criptografia e ainda valida a chave de autenticacao
-                        IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes("spmedical-key")),
+                        // Forma de criptografia e ainda valida a chave de autenticacao                 // tamanho de chave precisa ser maior
+                        IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes("spmedical-chave-joyce-senai")),
 
                         // Valida o tempo de expiracaoo do token
                         ClockSkew = TimeSpan.FromMinutes(30),

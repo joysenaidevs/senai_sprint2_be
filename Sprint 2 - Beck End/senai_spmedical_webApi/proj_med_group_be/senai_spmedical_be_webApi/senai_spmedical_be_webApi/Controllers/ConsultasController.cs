@@ -27,6 +27,8 @@ namespace senai_spmedical_be_webApi.Controllers
 
     // controlador de API
     [ApiController]
+
+    [Authorize(Roles = "1")]
     public class ConsultasController : ControllerBase
     {
         // Criar um objeto que irá receber todos os métodos da interface
@@ -47,7 +49,7 @@ namespace senai_spmedical_be_webApi.Controllers
         /// </summary>
         /// <returns>Lista de consulta e statuscode 200 (Ok)</returns>
         [HttpGet]           // endpoint de listagem
-        //[Authorize(Roles = "1")]
+        [Authorize(Roles = "1")]
         public IActionResult Get()
         {
             //tratamento de excessões
@@ -70,6 +72,7 @@ namespace senai_spmedical_be_webApi.Controllers
         /// <param name="id">ID da consulta que será buscada</param>
         /// <returns>retorna uma consulta buscada e status code 200</returns>
         [HttpGet("{id}")]
+        [Authorize(Roles = "1")]
         public IActionResult GetById(int id)
         {
             // tratamento de excessao
@@ -92,6 +95,7 @@ namespace senai_spmedical_be_webApi.Controllers
         /// <param name="novaConsulta">objeto novaConsulta que será cadastrada</param>
         /// <returns>StatusCode 201 - Created</returns>
         [HttpPost]
+        [Authorize(Roles = "1")]
         public IActionResult Post(Consulta novaConsulta)
         {
             // tratamento de excessao
@@ -145,6 +149,7 @@ namespace senai_spmedical_be_webApi.Controllers
         /// <param name="id">id da consulta q sera deletada</param>
         /// <returns>um statuscode 204</returns>
         [HttpDelete("{id}")]
+        [Authorize(Roles = "1")]
         public IActionResult Del (int id)
         {
             //tratamento de excessão
@@ -169,8 +174,8 @@ namespace senai_spmedical_be_webApi.Controllers
         /// Lista as consultas relacionadas com o id de quem estiver logado (médico ou paciente) 
         /// </summary>
         /// <returns>Uma lista das consultas e um StatusCode 200 - Ok</returns>
-        //[Authorize(Roles = "2,3")]
-        [HttpGet("Minhas")]
+        [Authorize(Roles = "2,3")]
+        [HttpGet("minhas")]
         public IActionResult GetMy()
         {
             try
@@ -193,7 +198,8 @@ namespace senai_spmedical_be_webApi.Controllers
         /// Lista a agenda do medico
         /// </summary>
         /// <returns>retorna uma lista de agenda e um StatusCode 200</returns>
-        [HttpGet("Agenda")]
+        [Authorize(Roles = "2")]
+        [HttpGet("agenda")]
         public IActionResult GetAgenda()
         {
             try

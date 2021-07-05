@@ -56,11 +56,11 @@ namespace senai_spmedical_be_webApi.Contexts
                 //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
 
                 //string de conexao Joyce
-                optionsBuilder.UseSqlServer("Data Source=WINDOWS\\SQLEXPRESS; initial catalog=medicalGroup; user Id=sa; pwd=adm@132;");
+                //optionsBuilder.UseSqlServer("Data Source=WINDOWS\\SQLEXPRESS; initial catalog=medicalGroup; user Id=sa; pwd=adm@132;");
 
 
                 //string de conexao do senai
-                //optionsBuilder.UseSqlServer("Data Source=LAB08DESK115999\\SQLEXPRESS; initial catalog=medicalGroup; integrated security=true");
+                optionsBuilder.UseSqlServer("Data Source=LAB08DESK115999\\SQLEXPRESS; initial catalog=medicalGroup; integrated security=true");
             }
         }
 

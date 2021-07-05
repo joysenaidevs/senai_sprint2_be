@@ -50,7 +50,11 @@ namespace senai_spmedical_be_webApi.Interfaces
         /// <returns>Um objeto do tipo Usuario que foi buscado</returns>ns>
         Usuario Login(string email, string senha);
 
-       
+
+        Prontuario BuscarProntuarioId(int id);
+
+        Medico BuscarMedicoId(int id);
+
 
 
 

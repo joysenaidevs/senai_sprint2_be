@@ -71,7 +71,22 @@ namespace senai_spmedical_be_webApi.Controllers
                 //    return NotFound("Email ou senha inválidos!");
                 //}
 
-                Usuario usuarioBuscado = _usuarioRepository.Login(login.Email, login.Senha);
+                Usuario usuarioBuscado = _usuarioRepository.Login(login.Email , login.Senha);
+
+                Prontuario prontuarioLogin = new Prontuario();
+
+                Medico medicoLogin = new Medico();
+
+
+                if (usuarioBuscado.IdTipoUsuario == 2)
+                {
+                    prontuarioLogin = _usuarioRepository.BuscarProntuarioId(usuarioBuscado.IdUsuario);
+                }
+
+                if (usuarioBuscado.IdTipoUsuario == 3)
+                {
+                    medicoLogin = _usuarioRepository.BuscarMedicoId(usuarioBuscado.IdUsuario);
+                }
 
                 // Caso não encontre nenhum usuário com o e-mail e senha informados
                 if (usuarioBuscado == null)
@@ -110,16 +125,18 @@ namespace senai_spmedical_be_webApi.Controllers
                     new Claim("role", usuarioBuscado.IdTipoUsuario.ToString()),
 
                     // Armazena na Claim o nome do usuário que foi autenticado
-                    new Claim(JwtRegisteredClaimNames.Name, usuarioBuscado.NomeUsuario)
+                    new Claim(JwtRegisteredClaimNames.Name, usuarioBuscado.NomeUsuario),
 
-                    //Armazena o NomeTipoUsuario ex: Administrador
-                   // new Claim(ClaimTypes.Role, usuarioBuscado.IdTipoUsuarioNavigation.NomeTipoUsuario.ToString())
+                    new Claim("nomeProntuario", usuarioBuscado.IdTipoUsuario == 2 ? $"{prontuarioLogin.NomeProntuario}" : "" ),
+
+                    new Claim("nomeMedico", usuarioBuscado.IdTipoUsuario == 3 ? $"{medicoLogin.NomeMedico}" : "" )
+
                 };
 
                 // define o acesso ao token     gerando a chave
-                var key = new  SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes("spmedical-key"));
+                var key = new  SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes("spmedical-chave-joyce-senai"));
 
-                // definindo as credenciais do token
+                // Define as credenciais do token - Header
                 var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
                 var gerarToken = new JwtSecurityToken(
@@ -131,7 +148,7 @@ namespace senai_spmedical_be_webApi.Controllers
                     signingCredentials: creds                       // credenciais         
                 );
 
-                // retorna o Token (StatusCode 200)
+                //  retorna Ok com o token criado
                 return Ok(new
                 {
                     token = new JwtSecurityTokenHandler().WriteToken(gerarToken)

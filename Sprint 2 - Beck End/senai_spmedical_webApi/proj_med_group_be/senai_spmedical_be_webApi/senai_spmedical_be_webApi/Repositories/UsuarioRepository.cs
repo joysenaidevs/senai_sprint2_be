@@ -1,4 +1,5 @@
-﻿using senai_spmedical_be_webApi.Contexts;
+﻿using Microsoft.EntityFrameworkCore;
+using senai_spmedical_be_webApi.Contexts;
 using senai_spmedical_be_webApi.Domains;
 using senai_spmedical_be_webApi.Interfaces;
 using System;
@@ -15,13 +16,59 @@ namespace senai_spmedical_be_webApi.Repositories
 
         public void Atualizar(int id, Usuario usuarioUpdate)
         {
-            throw new NotImplementedException();
+            // Busca um usuário através do id
+            Usuario usuarioBuscado = ctx.Usuarios.Find(id);
+
+            // Verifica se o nome do usuário foi informado
+            if (usuarioUpdate.NomeUsuario != null)
+            {
+                // Atribui os novos valores ao campos existentes
+                usuarioBuscado.NomeUsuario = usuarioUpdate.NomeUsuario;
+            }
+
+            // Verifica se o e-mail do usuário foi informado
+            if (usuarioUpdate.Email != null)
+            {
+                // Atribui os novos valores ao campos existentes
+                usuarioBuscado.Email = usuarioUpdate.Email;
+            }
+
+            // Verifica se a senha do usuário foi informado
+            if (usuarioUpdate.Senha != null)
+            {
+                // Atribui os novos valores ao campos existentes
+                usuarioBuscado.Senha = usuarioUpdate.Senha;
+            }
+
+            // Atualiza o tipo de usuário que foi buscado
+            ctx.Usuarios.Update(usuarioBuscado);
+
+            // Salva as informações para serem gravadas no banco
+            ctx.SaveChanges();
         }
+
+       
 
         public Usuario BuscarPorId(int id)
         {
-            throw new NotImplementedException();
+            return ctx.Usuarios
+               .Include(u => u.IdTipoUsuarioNavigation)
+
+               .Select(u => new Usuario
+               {
+                   IdUsuario = u.IdUsuario,
+                   Email = u.Email,
+
+                   IdTipoUsuarioNavigation = new TipoUsuario
+                   {
+                       IdTipoUsuario = u.IdTipoUsuarioNavigation.IdTipoUsuario,
+                       NomeTipoUsuario = u.IdTipoUsuarioNavigation.NomeTipoUsuario
+                   }
+               })
+               .FirstOrDefault(u => u.IdUsuario == id);
         }
+
+       
 
         /// <summary>
         /// Cadastra um novo usuário

@@ -45,11 +45,6 @@ namespace senai_spmedical_be_webApi.Interfaces
         void Deletar(int id);
 
 
-        /// <summary>
-        /// Lista todas as clinicas com seus respectivos medicos
-        /// </summary>
-        /// <returns>Uma lista de clinicas com seus medicos</returns>
-        /// metódo a parte, relacionando duas entidades ou mais
-        List<Clinica> ListarClinicas();
+       
     }
 }

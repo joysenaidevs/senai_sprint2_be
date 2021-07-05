@@ -4,6 +4,12 @@
         <name>senai_spmedical_be_webApi</name>
     </assembly>
     <members>
+        <member name="T:senai_spmedical_be_webApi.Controllers.ClinicasController">
+            <summary>
+            Controllers responsaveis pelas clinicas
+            </summary>
+            
+        </member>
         <member name="P:senai_spmedical_be_webApi.Controllers.ClinicasController._clinicaRepository">
             <summary>
             Objeto que irá receber todos os métodos definidos na interface IClinicaRepository
@@ -27,6 +33,28 @@
             </summary>
             <param name="id">ID da clinica buscada</param>
             <returns>uma clinica encontrada e um statuscode 200</returns>
+        </member>
+        <member name="M:senai_spmedical_be_webApi.Controllers.ClinicasController.Post(senai_spmedical_be_webApi.Domains.Clinica)">
+            <summary>
+            Cadastra uma clinica
+            </summary>
+            <param name="novaClinica">objeto para cadastrar uma nica</param>
+            <returns>retorna uma novva clinica</returns>
+        </member>
+        <member name="M:senai_spmedical_be_webApi.Controllers.ClinicasController.Put(System.Int32,senai_spmedical_be_webApi.Domains.Clinica)">
+            <summary>
+            Atualiza uma clinica através do seu id
+            </summary>
+            <param name="id">objeto da clinica</param>
+            <param name="clinicaUpdate">objeto para atualizar uma clinica existente</param>
+            <returns></returns>
+        </member>
+        <member name="M:senai_spmedical_be_webApi.Controllers.ClinicasController.Del(System.Int32)">
+            <summary>
+            Deleta uma clinica existente através do seu id
+            </summary>
+            <param name="id">id da clincia deletada</param>
+            <returns>retorna uma clinica existente deletada</returns>
         </member>
         <member name="M:senai_spmedical_be_webApi.Controllers.ConsultasController.#ctor">
             <summary>
@@ -80,6 +108,44 @@
             </summary>
             <returns>retorna uma lista de agenda e um StatusCode 200</returns>
         </member>
+        <member name="T:senai_spmedical_be_webApi.Controllers.EspecialidadeController">
+            <summary>
+            Controlador responsavel pelos endpoints consultas
+            </summary>
+        </member>
+        <member name="M:senai_spmedical_be_webApi.Controllers.EspecialidadeController.#ctor">
+            <summary>
+            Instancia o objeto _consultaRepository para que haja referencia aos métodos do repositorio
+            </summary>
+        </member>
+        <member name="M:senai_spmedical_be_webApi.Controllers.EspecialidadeController.Get">
+            <summary>
+            Lista todas as especialidades
+            </summary>
+            <returns>retorna uma lista de especialidadde e StatusCode - 200</returns>
+        </member>
+        <member name="M:senai_spmedical_be_webApi.Controllers.EspecialidadeController.Post(senai_spmedical_be_webApi.Domains.Especialidade)">
+            <summary>
+            Cadastra uma nova especialidade
+            </summary>
+            <param name="novaEspecialidade">objeto novaEspecialidade que era cadastrada</param>
+            <returns></returns>
+        </member>
+        <member name="M:senai_spmedical_be_webApi.Controllers.EspecialidadeController.GetById(System.Int32)">
+            <summary>
+            retorna uma especialidade através do seu id
+            </summary>
+            <param name="id">objeto da especialidade que sera buscada</param>
+            <returns>retorna uma especiadade buscada e status code 200</returns>
+        </member>
+        <member name="M:senai_spmedical_be_webApi.Controllers.EspecialidadeController.Put(System.Int32,senai_spmedical_be_webApi.Domains.Especialidade)">
+            <summary>
+            Atualiza a especialidade através do seu id
+            </summary>
+            <param name="id">id da especialidade buscada</param>
+            <param name="especialidadeUpdate">objeto especialidade com novas infrmacoes</param>
+            <returns>retorna uma especialidade atualizada e StatusCode 204</returns>
+        </member>
         <member name="T:senai_spmedical_be_webApi.Controllers.LoginController">
             <summary>
             Controller responsável pelos endpoints (URLs) referentes aos Logins
@@ -91,12 +157,160 @@
             Objeto _usuarioRepository que irá receber todos os métodos definidos na interface IuUsuarioRepository
             </summary>
         </member>
-        <member name="M:senai_spmedical_be_webApi.Controllers.LoginController.Login(senai_spmedical_be_webApi.LoginViewModels.LoginViewModel)">
+        <member name="M:senai_spmedical_be_webApi.Controllers.LoginController.Post(senai_spmedical_be_webApi.LoginViewModels.LoginViewModel)">
             <summary>
-            Valida o usuario
+            Valida o usuário
             </summary>
-            <param name="login">objeto com email e senha</param>
-            <returns>retorna</returns>
+            <param name="login">Objeto login que contém o e-mail e a senha do usuário</param>
+            <returns>Retorna um token com as informações do usuário</returns>
+            dominio/api/Login
+        </member>
+        <member name="T:senai_spmedical_be_webApi.Controllers.MedicosController">
+            <summary>
+            Controlador responsavel por medicos 
+            </summary>
+            
+        </member>
+        <member name="M:senai_spmedical_be_webApi.Controllers.MedicosController.#ctor">
+            <summary>
+            Instancia o objeto _medeicoRepository para que haja referencia aos métodos do repositorio
+            </summary>
+        </member>
+        <member name="M:senai_spmedical_be_webApi.Controllers.MedicosController.Get">
+            <summary>
+            Lista de todos os medicos
+            </summary>
+            <returns>Lista de medicose statuscode 200 (Ok)</returns>
+        </member>
+        <member name="M:senai_spmedical_be_webApi.Controllers.MedicosController.GetById(System.Int32)">
+            <summary>
+            Busca um medico através do seu id
+            </summary>
+            <param name="id">objeto que será buscado</param>
+            <returns>retorna o medico buscado e status code 200</returns>
+        </member>
+        <member name="M:senai_spmedical_be_webApi.Controllers.MedicosController.Post(senai_spmedical_be_webApi.Domains.Medico)">
+            <summary>
+            Cadastra um medico
+            </summary>
+            <param name="novoMedico">objeto novoMedico que será cadastrada</param>
+            <returns>StatusCode 201 - Created</returns>
+        </member>
+        <member name="M:senai_spmedical_be_webApi.Controllers.MedicosController.Put(System.Int32,senai_spmedical_be_webApi.Domains.Medico)">
+            <summary>
+            Atualiza um medico existente
+            </summary>
+            <param name="id">id do medico que sera atualizado</param>
+            <param name="medicoAtualizado">objeto com as novas informacoes</param>
+            <returns>status code 204 no content</returns>
+        </member>
+        <member name="M:senai_spmedical_be_webApi.Controllers.MedicosController.Del(System.Int32)">
+            <summary>
+            Deleta um nedico atraves do seu id
+            </summary>
+            <param name="id">id do medico que sera deletada</param>
+            <returns>um statuscode 204</returns>
+        </member>
+        <member name="T:senai_spmedical_be_webApi.Controllers.ProntuariosController">
+            <summary>
+            Controlador responsavel pelo repositorio de prontuarios
+            </summary>
+        </member>
+        <member name="F:senai_spmedical_be_webApi.Controllers.ProntuariosController._prontuarioRepository">
+            <summary>
+            Cria um objeto _prontuarioRepository que irá receber todos os métodos definidos na interface
+            </summary>
+        </member>
+        <member name="M:senai_spmedical_be_webApi.Controllers.ProntuariosController.#ctor">
+            <summary>
+            Instancia este objeto para que haja a referência aos métodos no repositório
+            </summary>
+        </member>
+        <member name="M:senai_spmedical_be_webApi.Controllers.ProntuariosController.Get">
+            <summary>
+            Lista todos os prontuarios
+            </summary>
+            <returns>Uma lIsta de prontuarios e um status code 200</returns>
+            define que somento o ADM pode acessar o método
+        </member>
+        <member name="M:senai_spmedical_be_webApi.Controllers.ProntuariosController.GetById(System.Int32)">
+            <summary>
+            Busca um prontuario através do ID
+            </summary>
+            <param name="id">ID da prontuario que será buscado</param>
+            <returns>Um prontuario buscado e um status code 200 - Ok</returns>
+        </member>
+        <member name="M:senai_spmedical_be_webApi.Controllers.ProntuariosController.Post(senai_spmedical_be_webApi.Domains.Prontuario)">
+            <summary>
+            Cadastra um novo prontuario
+            </summary>
+            <param name="novoProntuario">Objeto novaProntuario que será cadastrada</param>
+            <returns>Um status code 201 - Created</returns>
+        </member>
+        <member name="M:senai_spmedical_be_webApi.Controllers.ProntuariosController.Put(System.Int32,senai_spmedical_be_webApi.Domains.Prontuario)">
+            <summary>
+            Atualiza um prontuario existente
+            </summary>
+            <param name="id">ID da prontuario que será atualizado</param>
+            <param name="prontuarioUpdate">Objeto com as novas informações</param>
+            <returns>Um status code 204 - No Content</returns>
+        </member>
+        <member name="M:senai_spmedical_be_webApi.Controllers.ProntuariosController.Delete(System.Int32)">
+            <summary>
+            Deleta um prontuario existente
+            </summary>
+            <param name="id">ID da prontuario que será deletado</param>
+            <returns>Um status code 204 - No Content</returns>
+        </member>
+        <member name="T:senai_spmedical_be_webApi.Controllers.TiposUsuarioController">
+            <summary>
+            Controllers responsaveis pelos tipos usuarios
+            </summary>
+        </member>
+        <member name="P:senai_spmedical_be_webApi.Controllers.TiposUsuarioController._tipoUsuarioRepository">
+            <summary>
+            Cria um objeto _tipoUsuarioRepository que irá receber todos os métodos definidos na interface
+            </summary>
+        </member>
+        <member name="M:senai_spmedical_be_webApi.Controllers.TiposUsuarioController.#ctor">
+            <summary>
+            Instancia este objeto para que haja a referência aos métodos no repositório
+            </summary>
+        </member>
+        <member name="M:senai_spmedical_be_webApi.Controllers.TiposUsuarioController.Post(senai_spmedical_be_webApi.Domains.TipoUsuario)">
+            <summary>
+            Cadastra um novo tipo de usuário
+            </summary>
+            <param name="novoTipoUsuario">Objeto novoTipo a ser cadastrado</param>
+            <returns>Um StatusCode 201 - Created</returns>
+        </member>
+        <member name="M:senai_spmedical_be_webApi.Controllers.TiposUsuarioController.Get">
+            <summary>
+            Lista todos tipos de usuários existentes
+            </summary>
+            <returns>Uma lista de tipos de usuário e um StatusCode 200 - Ok</returns>
+        </member>
+        <member name="M:senai_spmedical_be_webApi.Controllers.TiposUsuarioController.GetById(System.Int32)">
+            <summary>
+            Busca um tipo de usuário pelo seu id
+            </summary>
+            <param name="id">Id do tipo de usuário buscado</param>
+            <returns>Um tipo de usuario buscado e um StatusCode 200 - Ok</returns>
+        </member>
+        <member name="M:senai_spmedical_be_webApi.Controllers.TiposUsuarioController.Put(System.Int32,senai_spmedical_be_webApi.Domains.TipoUsuario)">
+            <summary>
+            Atualiza uma tipo de usuário existente
+            </summary>
+            <param name="id">Id do tipo de usuário a ser atualizado</param>
+            <param name="tipoUsuarioUpdate">Objeto tipoAtualizado com as novas informações</param>
+            <returns>Um StatusCode 204 - No Content</returns>
+        </member>
+        <member name="M:senai_spmedical_be_webApi.Controllers.TiposUsuarioController.Delete(System.Int32)">
+            <summary>
+            Deleta um tipo de usuário existente
+            </summary>
+            <param name="id">Id do tipo de usuário a ser deletado</param>
+            <returns>Um StatusCode 204 - No Content</returns>
         </member>
         <member name="T:senai_spmedical_be_webApi.Controllers.UsuariosController">
             <summary>
@@ -120,6 +334,13 @@
             </summary>
             <returns>Uma lista de usuários e um status code 200 - Ok</returns>
         </member>
+        <member name="M:senai_spmedical_be_webApi.Controllers.UsuariosController.GetById(System.Int32)">
+            <summary>
+            Busca um usuário pelo seu id
+            </summary>
+            <param name="id">Id do usuário buscado</param>
+            <returns>Um usuario buscado e um StatusCode 200 - Ok</returns>
+        </member>
         <member name="M:senai_spmedical_be_webApi.Controllers.UsuariosController.Post(senai_spmedical_be_webApi.Domains.Usuario)">
             <summary>
             Cadastra um novo usuário
@@ -132,7 +353,7 @@
             Atualiza um usuário existente
             </summary>
             <param name="id">ID do usuário que será atualizado</param>
-            <param name="usuarioAtualizado">Objeto com as novas informações</param>
+            <param name="usuarioUpdate">Objeto com as novas informações</param>
             <returns>Um status code 204 - No Content</returns>
         </member>
         <member name="M:senai_spmedical_be_webApi.Controllers.UsuariosController.Delete(System.Int32)">
@@ -178,13 +399,6 @@
             Deleta uma clinica
             </summary>
             <param name="id">Id da calinica que será deletada</param>
-        </member>
-        <member name="M:senai_spmedical_be_webApi.Interfaces.IClinicaRepository.ListarClinicas">
-            <summary>
-            Lista todas as clinicas com seus respectivos medicos
-            </summary>
-            <returns>Uma lista de clinicas com seus medicos</returns>
-            metódo a parte, relacionando duas entidades ou mais
         </member>
         <member name="M:senai_spmedical_be_webApi.Interfaces.IConsultaRepository.Cadastrar(senai_spmedical_be_webApi.Domains.Consulta)">
             <summary>
@@ -244,6 +458,112 @@
             </summary>
             <param name="id">id da consulta que tera a situacao alterada</param>
             <param name="status">Parâmetro que atualiza o situação da consulta para 1 - Agendada, 2 - Cancelada </param>
+        </member>
+        <member name="M:senai_spmedical_be_webApi.Interfaces.IEspecialidadeRepository.Listar">
+            <summary>
+            Listar as especialidades
+            </summary>
+            <returns>uma lista de especialidades</returns>
+        </member>
+        <member name="M:senai_spmedical_be_webApi.Interfaces.IEspecialidadeRepository.Cadastrar(senai_spmedical_be_webApi.Domains.Especialidade)">
+            <summary>
+            Cadastra uma especialidade
+            </summary>
+            <param name="novaEspecialidade">objeto novaEspecialidade cadastrada</param>
+        </member>
+        <member name="M:senai_spmedical_be_webApi.Interfaces.IEspecialidadeRepository.BuscarPorId(System.Int32)">
+            <summary>
+            Busca uma especialidade  através do seu id
+            </summary>
+            <param name="id">id da especialidade buscada</param>
+            <returns>retorna a especialidade buscada</returns>
+        </member>
+        <member name="M:senai_spmedical_be_webApi.Interfaces.IEspecialidadeRepository.Atualizar(System.Int32,senai_spmedical_be_webApi.Domains.Especialidade)">
+            <summary>
+            Atualiza uma especialidade existente
+            </summary>
+            <param name="id">id da especialidade do medico</param>
+            <param name="especialidadeUpdate">retorna uma especialidade atualizada</param>
+        </member>
+        <member name="M:senai_spmedical_be_webApi.Interfaces.IEspecialidadeRepository.Deletar(System.Int32)">
+            <summary>
+            Deleta uma especialidade existente
+            </summary>
+            <param name="id">id da especialidade</param>
+        </member>
+        <member name="T:senai_spmedical_be_webApi.Interfaces.IMedicoRepository">
+            <summary>
+            interface responsavel pelo repositório de medicos
+            </summary>
+        </member>
+        <member name="M:senai_spmedical_be_webApi.Interfaces.IMedicoRepository.Cadastrar(senai_spmedical_be_webApi.Domains.Medico)">
+            <summary>
+            Cadastra um novo medico
+            </summary>
+            <param name="novoMedico">objeto novoMedico que será cadastrado</param>
+        </member>
+        <member name="M:senai_spmedical_be_webApi.Interfaces.IMedicoRepository.Listar">
+            <summary>
+            Lista todos os medicos
+            </summary>
+            <returns>uma lista de medicos cadastrados</returns>
+        </member>
+        <member name="M:senai_spmedical_be_webApi.Interfaces.IMedicoRepository.BuscarPorId(System.Int32)">
+            <summary>
+            Busca um medico através do seu id
+            </summary>
+            <param name="id">objeto que será buscado</param>
+            <returns>retorna o medico buscado e status code 200</returns>
+        </member>
+        <member name="M:senai_spmedical_be_webApi.Interfaces.IMedicoRepository.Atualizar(System.Int32,senai_spmedical_be_webApi.Domains.Medico)">
+            <summary>
+            Atualiza um medico existente
+            </summary>
+            <param name="id">id do medico atualizado</param>
+            <param name="medicoAtualizado">objeto que será atualizado</param>
+        </member>
+        <member name="M:senai_spmedical_be_webApi.Interfaces.IMedicoRepository.Deletar(System.Int32)">
+            <summary>
+            Deleta um medico existente através do seu id
+            </summary>
+            <param name="id">id do medico que será deletado</param>
+        </member>
+        <member name="T:senai_spmedical_be_webApi.Interfaces.ITipoUsuarioRepository">
+            <summary>
+            Interface responsavel pelos tipos de usuarios
+            </summary>
+        </member>
+        <member name="M:senai_spmedical_be_webApi.Interfaces.ITipoUsuarioRepository.Listar">
+            <summary>
+            Lista de tiposUsuarios
+            </summary>
+            <returns>retorna uma lista de usuarios</returns>
+        </member>
+        <member name="M:senai_spmedical_be_webApi.Interfaces.ITipoUsuarioRepository.Cadastrar(senai_spmedical_be_webApi.Domains.TipoUsuario)">
+            <summary>
+            Cadastra um novo tipo de usuario
+            </summary>
+            <param name="novoTipoUsuario">objeto que será cadastrado</param>
+        </member>
+        <member name="M:senai_spmedical_be_webApi.Interfaces.ITipoUsuarioRepository.BuscarPorId(System.Int32)">
+            <summary>
+            Busca um tipo de usuario através do seu id
+            </summary>
+            <param name="id">id do tipo usuario buscado</param>
+            <returns></returns>
+        </member>
+        <member name="M:senai_spmedical_be_webApi.Interfaces.ITipoUsuarioRepository.Atualizar(System.Int32,senai_spmedical_be_webApi.Domains.TipoUsuario)">
+            <summary>
+            Atualiza um tipo de usuario existente através do seu id
+            </summary>
+            <param name="id">id do usuario existente</param>
+            <param name="tipoUsuarioUpdate">objeto que será atualizado</param>
+        </member>
+        <member name="M:senai_spmedical_be_webApi.Interfaces.ITipoUsuarioRepository.Deletar(System.Int32)">
+            <summary>
+            Delta um tipo de usuario existente
+            </summary>
+            <param name="id">id do tipo de usuario deletado</param>
         </member>
         <member name="M:senai_spmedical_be_webApi.Interfaces.IUsuarioRepository.Listar">
             <summary>
@@ -335,6 +655,96 @@
             Lista todas as consultas
             </summary>
             <returns>Uma Lista das consultas</returns>
+        </member>
+        <member name="T:senai_spmedical_be_webApi.Repositories.EspecialidadeRepository">
+            <summary>
+            repositório responsavel pelos Repositorio Especialidade
+            </summary>
+        </member>
+        <member name="F:senai_spmedical_be_webApi.Repositories.EspecialidadeRepository.ctx">
+            objeto do tipo MedicalContext (ctx) para utilizar em todos os métodos
+             <summary>
+             Objeto contexto por onde serão chamados os métodos do EF Core
+             </summary>
+        </member>
+        <member name="M:senai_spmedical_be_webApi.Repositories.EspecialidadeRepository.BuscarPorId(System.Int32)">
+            <summary>
+            Busca uma especialidade através do seu id
+            </summary>
+            <param name="id">id da especialidade buscada</param>
+            <returns>retorna a especialidade do medico buscada</returns>
+        </member>
+        <member name="M:senai_spmedical_be_webApi.Repositories.EspecialidadeRepository.Cadastrar(senai_spmedical_be_webApi.Domains.Especialidade)">
+            <summary>
+            Cadastra uma nova especialidade
+            </summary>
+            <param name="novaEspecialidade">objeto para nova especialidade</param>
+        </member>
+        <member name="M:senai_spmedical_be_webApi.Repositories.EspecialidadeRepository.Listar">
+            <summary>
+            Lista as especialidades
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:senai_spmedical_be_webApi.Repositories.MedicoRepository.BuscarPorId(System.Int32)">
+            <summary>
+            Buscar um medico através do seu id
+            </summary>
+            <param name="id">id do medico que sera buscada</param>
+            <returns>retorna um medico buscado e status code 200 </returns>
+        </member>
+        <member name="M:senai_spmedical_be_webApi.Repositories.MedicoRepository.Cadastrar(senai_spmedical_be_webApi.Domains.Medico)">
+            <summary>
+            Cadastra um novo medico
+            </summary>
+            <param name="novoMedico">objeto que será cadastrado</param>
+        </member>
+        <member name="M:senai_spmedical_be_webApi.Repositories.MedicoRepository.Deletar(System.Int32)">
+            <summary>
+            Deleta um medico existente
+            </summary>
+            <param name="id">id do objeto que será deletado</param>
+        </member>
+        <member name="M:senai_spmedical_be_webApi.Repositories.MedicoRepository.Listar">
+            <summary>
+            Lista todos os medicos
+            </summary>
+            <returns>uma lista de medicos e um status code 200</returns>
+        </member>
+        <member name="M:senai_spmedical_be_webApi.Repositories.ProntuarioRepository.BuscarPorId(System.Int32)">
+            <summary>
+            Buscar um prontuario através do seu id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:senai_spmedical_be_webApi.Repositories.ProntuarioRepository.Cadastrar(senai_spmedical_be_webApi.Domains.Prontuario)">
+            <summary>
+            Cadastrar um prontuario
+            </summary>
+            <param name="novoProntuario">objeto que será cadastrado</param>
+        </member>
+        <member name="M:senai_spmedical_be_webApi.Repositories.ProntuarioRepository.Listar">
+            <summary>
+            Lista de prontuarios
+            </summary>
+            <returns>retorna uma lista de prontuarios</returns>
+        </member>
+        <member name="T:senai_spmedical_be_webApi.Repositories.TipoUsuarioRepository">
+            <summary>
+            repositório responsavel por TipoUsuario
+            </summary>
+        </member>
+        <member name="F:senai_spmedical_be_webApi.Repositories.TipoUsuarioRepository.ctx">
+            <summary>
+            Objeto contexto que será chamado o EF Core
+            </summary>
+        </member>
+        <member name="M:senai_spmedical_be_webApi.Repositories.TipoUsuarioRepository.Cadastrar(senai_spmedical_be_webApi.Domains.TipoUsuario)">
+            <summary>
+            Cadastra um novo tipo de usuario
+            </summary>
+            <param name="novoTipoUsuario">objeto novo tipo de usuario cadastrado</param>
         </member>
         <member name="M:senai_spmedical_be_webApi.Repositories.UsuarioRepository.Cadastrar(senai_spmedical_be_webApi.Domains.Usuario)">
             <summary>

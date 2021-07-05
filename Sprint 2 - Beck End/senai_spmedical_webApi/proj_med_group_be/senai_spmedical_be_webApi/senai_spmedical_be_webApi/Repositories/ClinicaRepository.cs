@@ -21,34 +21,56 @@ namespace senai_spmedical_be_webApi.Repositories
 
         public void Atualizar(int id, Clinica clinicaUpdate)
         {
-            throw new NotImplementedException();
+            Clinica clinicaBuscada = ctx.Clinicas.Find(id);
+
+            if (clinicaUpdate.RazaoSocial != null)
+            {
+                clinicaBuscada.RazaoSocial = clinicaUpdate.RazaoSocial;
+            }
+            if (clinicaUpdate.NomeFantasia != null)
+            {
+                clinicaBuscada.NomeFantasia = clinicaUpdate.NomeFantasia;
+            }
+            if (clinicaUpdate.Endereco != null)
+            {
+                clinicaBuscada.Endereco = clinicaUpdate.Endereco;
+            }
+
+            clinicaBuscada.HorarioFuncionamento = clinicaUpdate.HorarioFuncionamento;
+
+            if (clinicaUpdate.Cnpj != null)
+            {
+                clinicaBuscada.Cnpj = clinicaUpdate.Cnpj;
+            }
+            
+
+            ctx.Clinicas.Update(clinicaBuscada);
+
+            ctx.SaveChanges();
         }
 
         public Clinica BuscarPorId(int id)
         {
             // retorna clinicas para o ID informado
-            return ctx.Clinicas.FirstOrDefault(e => e.IdClinica == id);
+            return ctx.Clinicas.FirstOrDefault(c => c.IdClinica == id);
 
 
-            //    try
-            //    {
-            //        // Retora a resposta da requisição fazendo a chamada para o método
-            //        return Ok(_clinicaRepository.BuscarPorId(id));
-            //    }
-            //    catch (Exception erro)
-            //    {
-            //        return BadRequest(erro);
-            //    }
         }
 
         public void Cadastrar(Clinica novaClinica)
         {
-            throw new NotImplementedException();
+            ctx.Clinicas.Add(novaClinica);
+
+            ctx.SaveChanges();
         }
 
         public void Deletar(int id)
         {
-            throw new NotImplementedException();
+            Clinica clinicaBuscada = ctx.Clinicas.Find(id);
+
+            ctx.Clinicas.Remove(clinicaBuscada);
+
+            ctx.SaveChanges();
         }
 
         /// <summary>
@@ -61,9 +83,6 @@ namespace senai_spmedical_be_webApi.Repositories
             return ctx.Clinicas.ToList();
         }
 
-        public List<Clinica> ListarClinicas()
-        {
-            throw new NotImplementedException();
-        }
+       
     }
 }

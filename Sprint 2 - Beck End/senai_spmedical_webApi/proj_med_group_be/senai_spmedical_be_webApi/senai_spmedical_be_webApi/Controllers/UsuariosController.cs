@@ -63,6 +63,27 @@ namespace senai_spmedical_be_webApi.Controllers
         }
 
         /// <summary>
+        /// Busca um usuário pelo seu id
+        /// </summary>
+        /// <param name="id">Id do usuário buscado</param>
+        /// <returns>Um usuario buscado e um StatusCode 200 - Ok</returns>
+        //[Authorize(Roles = "1")]
+        [HttpGet("{id}")]
+        public IActionResult GetById(int id)
+        {
+            try
+            {
+                return Ok(_usuarioRepository.BuscarPorId(id));
+
+
+            }
+            catch (Exception erro)
+            {
+                return BadRequest(erro);
+            }
+        }
+
+        /// <summary>
         /// Cadastra um novo usuário
         /// </summary>
         /// <param name="novoUsuario">Objeto novoUsuario que será cadastrado</param>
@@ -89,16 +110,16 @@ namespace senai_spmedical_be_webApi.Controllers
         /// Atualiza um usuário existente
         /// </summary>
         /// <param name="id">ID do usuário que será atualizado</param>
-        /// <param name="usuarioAtualizado">Objeto com as novas informações</param>
+        /// <param name="usuarioUpdate">Objeto com as novas informações</param>
         /// <returns>Um status code 204 - No Content</returns>
         [HttpPut("{id}")]
         //[Authorize(Roles = "1")
-        public IActionResult Put(int id, Usuario usuarioAtualizado)
+        public IActionResult Put(int id, Usuario usuarioUpdate)
         {
             try
             {
                 // Faz a chamada para o método
-                _usuarioRepository.Atualizar(id, usuarioAtualizado);
+                _usuarioRepository.Atualizar(id, usuarioUpdate);
 
                 // Retorna um status code
                 return StatusCode(204);

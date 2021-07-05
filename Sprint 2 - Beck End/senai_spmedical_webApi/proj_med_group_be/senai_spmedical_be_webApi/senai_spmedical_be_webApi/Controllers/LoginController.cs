@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using senai_spmedical_be_webApi.Domains;
@@ -45,25 +46,40 @@ namespace senai_spmedical_be_webApi.Controllers
             _usuarioRepository = new UsuarioRepository();
         }
 
+
         /// <summary>
-        /// Valida o usuario
+        /// Valida o usuário
         /// </summary>
-        /// <param name="login">objeto com email e senha</param>
-        /// <returns>retorna</returns>
+        /// <param name="login">Objeto login que contém o e-mail e a senha do usuário</param>
+        /// <returns>Retorna um token com as informações do usuário</returns>
+        /// dominio/api/Login
+
+        //[Authorize(Roles = "1")]
         [HttpPost]
-        public IActionResult Login(LoginViewModel login)
+        public IActionResult Post(LoginViewModel login)
         {
             try
             {
+
                 // informações do usuario
-                Usuario usuarioBuscado = _usuarioRepository.Login(login.Email, login.Senha);
+                //Usuario usuarioBuscado = _usuarioRepository.Login(login.Email, login.Senha);
 
                 // caso nao encontre um usuario ou email e a senha
+                //if (usuarioBuscado == null)
+                //{
+                //    // retorna um notFound com mensagem personalizada
+                //    return NotFound("Email ou senha inválidos!");
+                //}
+
+                Usuario usuarioBuscado = _usuarioRepository.Login(login.Email, login.Senha);
+
+                // Caso não encontre nenhum usuário com o e-mail e senha informados
                 if (usuarioBuscado == null)
                 {
-                    // retorna um notFound com mensagem personalizada
-                    return NotFound("Email ou senha inválidos!");
+                    // Retorna NotFound com uma mensagem de erro
+                    return NotFound("E-mail ou senha inválidos!");
                 }
+
 
                 //caso seja encontrado, cria o token
 
@@ -77,7 +93,7 @@ namespace senai_spmedical_be_webApi.Controllers
 
                 // criando uma variavel chamada claims do tipo arrays
                 // define os dados que serao fornecidos no Token - Payload
-                var claims = new[]
+                var claim = new[]
                 {
                     // criando uma nova claim para armazenar o email do usuario
                     // PEGANDO O Email do usuario buscado do banco de dados atraves do email e da senha
@@ -88,33 +104,39 @@ namespace senai_spmedical_be_webApi.Controllers
                     new Claim(JwtRegisteredClaimNames.Jti, usuarioBuscado.IdUsuario.ToString()),
 
                     // armazenando o idTipoUsuario ex: 1
-                    new Claim(ClaimTypes.Role, usuarioBuscado.IdTipoUsuario.ToString())
+                    new Claim(ClaimTypes.Role, usuarioBuscado.IdTipoUsuario.ToString()),
+
+                      // Armazena na Claim o tipo de usuário que foi autenticado (Administrador ou Comum) de forma personalizada
+                    new Claim("role", usuarioBuscado.IdTipoUsuario.ToString()),
+
+                    // Armazena na Claim o nome do usuário que foi autenticado
+                    new Claim(JwtRegisteredClaimNames.Name, usuarioBuscado.NomeUsuario)
 
                     //Armazena o NomeTipoUsuario ex: Administrador
-                    //new Claim(ClaimTypes.Role, usuarioBuscado.IdTipoUsuarioNavigation.NomeTipoUsuario)
+                   // new Claim(ClaimTypes.Role, usuarioBuscado.IdTipoUsuarioNavigation.NomeTipoUsuario.ToString())
                 };
 
                 // define o acesso ao token     gerando a chave
-                var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes("spmedical-key"));
+                var key = new  SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes("spmedical-key"));
 
                 // definindo as credenciais do token
                 var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
-                var token = new JwtSecurityToken(
-                issuer:                         "spmedical_webApi",             //emissor do token
-                audience:                       "spmedical_be.webApi",             // destinátario do token
-                claims:                         claims,                         //dados da claim (email, idUsuario e idTipoUsuario)
-                expires:                        DateTime.Now.AddMinutes(30),        // tempo de expiração
-                signingCredentials:             creds                               // credenciais                           //
+                var gerarToken = new JwtSecurityToken(
 
-            );
+                    issuer: "spmedical_webApi",                     // emissor do token
+                    audience: "spmedical_be.webApi",                // destinátario do token
+                    claims: claim,                                  // dados da claim (email, idUsuario e idTipoUsuario)
+                    expires: DateTime.Now.AddMinutes(30),           // tempo de expiração
+                    signingCredentials: creds                       // credenciais         
+                );
+
                 // retorna o Token (StatusCode 200)
                 return Ok(new
                 {
-                    token = new JwtSecurityTokenHandler().WriteToken(token)
+                    token = new JwtSecurityTokenHandler().WriteToken(gerarToken)
                 });
             }
-
             catch (Exception ex)
             {
                 // caso  seja encontrado ou ocorra algum erro , retorna a exception

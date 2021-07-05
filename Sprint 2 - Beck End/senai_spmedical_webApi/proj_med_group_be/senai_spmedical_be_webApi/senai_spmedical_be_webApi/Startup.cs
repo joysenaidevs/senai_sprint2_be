@@ -37,13 +37,15 @@ namespace senai_spmedical_be_webApi
 
                 });
 
-            // Adiciona o CORS ao projeto
-            //services.AddCors(options => {
-            //    options.AddPolicy("CorsPolicy",
-            //        builder => {
-            //            builder.WithOrigins("http://localhost:3000", "http://localhost:19006")
-            //                                                        .AllowAnyHeader()
-            //                                                        .AllowAnyMethod();
+            //adiciona o cors ao projeto
+            //services.addcors(options =>
+            //{
+            //    options.addpolicy("corspolicy",
+            //        builder =>
+            //        {
+            //            builder.withorigins("http://localhost:3000", "http://localhost:19006")
+            //                                                        .allowanyheader()
+            //                                                        .allowanymethod();
             //        }
             //    );
             //});
@@ -121,7 +123,7 @@ namespace senai_spmedical_be_webApi
             app.UseAuthentication();
 
             // Define o uso de CORS
-            app.UseCors("CorsPolicy");
+            //app.UseCors("CorsPolicy");
 
 
             app.UseEndpoints(endpoints =>

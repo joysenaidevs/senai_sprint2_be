@@ -37,18 +37,16 @@ namespace senai_spmedical_be_webApi
 
                 });
 
-            //adiciona o cors ao projeto
-            //services.addcors(options =>
-            //{
-            //    options.addpolicy("corspolicy",
-            //        builder =>
-            //        {
-            //            builder.withorigins("http://localhost:3000", "http://localhost:19006")
-            //                                                        .allowanyheader()
-            //                                                        .allowanymethod();
-            //        }
-            //    );
-            //});
+            // Adiciona o CORS ao projeto
+            services.AddCors(options => {
+                options.AddPolicy("CorsPolicy",
+                    builder => {
+                        builder.WithOrigins("http://localhost:3000", "http://localhost:19006")
+                                                                    .AllowAnyHeader()
+                                                                    .AllowAnyMethod();
+                    }
+                );
+            });
 
             // configurando swagger adicionando serviço
             services.AddSwaggerGen(c => {
@@ -123,7 +121,7 @@ namespace senai_spmedical_be_webApi
             app.UseAuthentication();
 
             // Define o uso de CORS
-            //app.UseCors("CorsPolicy");
+            app.UseCors("CorsPolicy");
 
 
             app.UseEndpoints(endpoints =>

@@ -46,7 +46,7 @@ namespace senai_spmedical_be_webApi.Controllers
         /// </summary>
         /// <param name="novoTipoUsuario">Objeto novoTipo a ser cadastrado</param>
         /// <returns>Um StatusCode 201 - Created</returns>
-        [Authorize(Roles = "1")]
+        //[Authorize(Roles = "1")]
         [HttpPost]
         public IActionResult Post(TipoUsuario novoTipoUsuario)
         {

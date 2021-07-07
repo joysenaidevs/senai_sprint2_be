@@ -47,10 +47,6 @@ namespace senai_spmedical_be_webApi.Repositories
             ctx.SaveChanges();
         }
 
-        public Medico BuscarMedicoId(int id)
-        {
-            return ctx.Medicos.FirstOrDefault(u => u.IdUsuario == id);
-        }
 
         public Usuario BuscarPorId(int id)
         {
@@ -69,6 +65,10 @@ namespace senai_spmedical_be_webApi.Repositories
                    }
                })
                .FirstOrDefault(u => u.IdUsuario == id);
+        }
+        public Medico BuscarMedicoId(int id)
+        {
+            return ctx.Medicos.FirstOrDefault(u => u.IdUsuario == id);
         }
 
         public Prontuario BuscarProntuarioId(int id)

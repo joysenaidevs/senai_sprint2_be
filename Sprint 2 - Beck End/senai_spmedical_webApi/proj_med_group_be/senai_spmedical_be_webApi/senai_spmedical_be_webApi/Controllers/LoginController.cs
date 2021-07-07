@@ -73,20 +73,20 @@ namespace senai_spmedical_be_webApi.Controllers
 
                 Usuario usuarioBuscado = _usuarioRepository.Login(login.Email , login.Senha);
 
-                Prontuario prontuarioLogin = new Prontuario();
+                //Prontuario prontuarioLogin = new Prontuario();
 
-                Medico medicoLogin = new Medico();
+                //Medico medicoLogin = new Medico();
 
 
-                if (usuarioBuscado.IdTipoUsuario == 2)
-                {
-                    prontuarioLogin = _usuarioRepository.BuscarProntuarioId(usuarioBuscado.IdUsuario);
-                }
+                //if (usuarioBuscado.IdTipoUsuario == 2)
+                //{
+                //    prontuarioLogin = _usuarioRepository.BuscarProntuarioId(usuarioBuscado.IdUsuario);
+                //}
 
-                if (usuarioBuscado.IdTipoUsuario == 3)
-                {
-                    medicoLogin = _usuarioRepository.BuscarMedicoId(usuarioBuscado.IdUsuario);
-                }
+                //if (usuarioBuscado.IdTipoUsuario == 3)
+                //{
+                //    medicoLogin = _usuarioRepository.BuscarMedicoId(usuarioBuscado.IdUsuario);
+                //}
 
                 // Caso não encontre nenhum usuário com o e-mail e senha informados
                 if (usuarioBuscado == null)
@@ -110,9 +110,9 @@ namespace senai_spmedical_be_webApi.Controllers
                 // define os dados que serao fornecidos no Token - Payload
                 var claim = new[]
                 {
-                    // criando uma nova claim para armazenar o email do usuario
-                    // PEGANDO O Email do usuario buscado do banco de dados atraves do email e da senha
-                    //e esta sendo armazenado na primeira claim
+                    //     criando uma nova claim para armazenar o email do usuario
+                    //     PEGANDO O Email do usuario buscado do banco de dados atraves do email e da senha
+                   // e esta sendo armazenado na primeira claim
                     new Claim(JwtRegisteredClaimNames.Email, usuarioBuscado.Email),
 
                     // armazena na claim o id do usuario autenticado
@@ -127,10 +127,9 @@ namespace senai_spmedical_be_webApi.Controllers
                     // Armazena na Claim o nome do usuário que foi autenticado
                     new Claim(JwtRegisteredClaimNames.Name, usuarioBuscado.NomeUsuario),
 
-                    new Claim("nomeProntuario", usuarioBuscado.IdTipoUsuario == 2 ? $"{prontuarioLogin.NomeProntuario}" : "" ),
+                    //new Claim("nomeProntuario", usuarioBuscado.IdTipoUsuario == 2 ? $"{prontuarioLogin.NomeProntuario}" : ""),
 
-                    new Claim("nomeMedico", usuarioBuscado.IdTipoUsuario == 3 ? $"{medicoLogin.NomeMedico}" : "" )
-
+                    //new Claim("nomeMedico", usuarioBuscado.IdTipoUsuario == 3 ? $"{medicoLogin.NomeMedico}" : "")
                 };
 
                 // define o acesso ao token     gerando a chave

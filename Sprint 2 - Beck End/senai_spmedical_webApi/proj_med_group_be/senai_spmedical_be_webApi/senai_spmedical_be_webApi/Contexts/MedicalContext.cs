@@ -60,7 +60,7 @@ namespace senai_spmedical_be_webApi.Contexts
 
 
                 //string de conexao do senai
-                optionsBuilder.UseSqlServer("Data Source=LAB08DESK115999\\SQLEXPRESS; initial catalog=medicalGroup; integrated security=true");
+                optionsBuilder.UseSqlServer("Data Source=LAB08DESK2601\\SQLEXPRESS01; initial catalog=medicalGroup; integrated security=true");
             }
         }
 

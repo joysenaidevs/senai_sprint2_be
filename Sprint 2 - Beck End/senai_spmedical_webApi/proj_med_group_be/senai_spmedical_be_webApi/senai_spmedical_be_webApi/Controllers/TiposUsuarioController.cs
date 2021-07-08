@@ -26,6 +26,8 @@ namespace senai_spmedical_be_webApi.Controllers
 
     //controlador de api
     [ApiController]
+
+    [Authorize(Roles = "1")]
     public class TiposUsuarioController : ControllerBase
     {
         /// <summary>
@@ -46,7 +48,7 @@ namespace senai_spmedical_be_webApi.Controllers
         /// </summary>
         /// <param name="novoTipoUsuario">Objeto novoTipo a ser cadastrado</param>
         /// <returns>Um StatusCode 201 - Created</returns>
-        [Authorize(Roles = "1")]
+     
         [HttpPost]
         public IActionResult Post(TipoUsuario novoTipoUsuario)
         {
@@ -70,7 +72,7 @@ namespace senai_spmedical_be_webApi.Controllers
         /// Lista todos tipos de usuários existentes
         /// </summary>
         /// <returns>Uma lista de tipos de usuário e um StatusCode 200 - Ok</returns>
-        [Authorize(Roles = "1")]
+       
         [HttpGet]
         public IActionResult Get()
         {
@@ -90,7 +92,7 @@ namespace senai_spmedical_be_webApi.Controllers
         /// </summary>
         /// <param name="id">Id do tipo de usuário buscado</param>
         /// <returns>Um tipo de usuario buscado e um StatusCode 200 - Ok</returns>
-        [Authorize(Roles = "1")]
+     
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
@@ -112,7 +114,7 @@ namespace senai_spmedical_be_webApi.Controllers
         /// <param name="id">Id do tipo de usuário a ser atualizado</param>
         /// <param name="tipoUsuarioUpdate">Objeto tipoAtualizado com as novas informações</param>
         /// <returns>Um StatusCode 204 - No Content</returns>
-        [Authorize(Roles = "1")]
+       
         [HttpPut("{id}")]
         public IActionResult Put(int id, TipoUsuario tipoUsuarioUpdate)
         {
@@ -133,7 +135,7 @@ namespace senai_spmedical_be_webApi.Controllers
         /// </summary>
         /// <param name="id">Id do tipo de usuário a ser deletado</param>
         /// <returns>Um StatusCode 204 - No Content</returns>
-        [Authorize(Roles = "1")]
+       
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {

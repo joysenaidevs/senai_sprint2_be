@@ -37,7 +37,42 @@ namespace senai_spmedical_be_webApi.Repositories
 
         public void AtualizarStatus(int id, string status)
         {
-            throw new NotImplementedException();
+            Consulta consultaBuscada = ctx.Consultas
+                //Adiciona na bunca das informações o usuario que realiza a consulta
+                .Include(c => c.IdProntuarioNavigation)
+
+                //adiciona na busca as informações da consulta que o usuario vai realizar
+                .Include(c => c.IdMedicoNavigation)
+                .FirstOrDefault(c => c.IdConsulta == id);
+
+            //verifica qual status foi informado
+            switch (status)
+            {
+                // Se for 1, a situação da presença será "Confirmada"
+                case "1":
+                    consultaBuscada.Situacao = "Agendada";
+                    break;
+
+                // Se for 0, a situação da presença será "Recusada"
+                case "0":
+                    consultaBuscada.Situacao = "Não Agendada";
+                    break;
+
+                // Se for 2, a situação da presença será "Não confirmada"
+                case "2":
+                    consultaBuscada.Situacao = "Cancelada";
+                    break;
+
+                // Se for qualquer valor diferente de 0, 1 e 2, a situação da presença não será alterada
+                default:
+                    consultaBuscada.Situacao = consultaBuscada.Situacao;
+                    break;
+            }
+
+            // Atualiza os dados da consulta que foi buscado
+            ctx.Consultas.Update(consultaBuscada);
+            // Salva as informações para serem gravadas no banco
+            ctx.SaveChanges();
         }
 
         /// <summary>
@@ -144,6 +179,7 @@ namespace senai_spmedical_be_webApi.Repositories
             //return ctx.Consultas.FirstOrDefault(consulta => consulta.IdConsulta == id);
         }
 
+        
         public List<Consulta> ListarMinhas(int id)
         {
             // listar todas as consultas
@@ -154,10 +190,10 @@ namespace senai_spmedical_be_webApi.Repositories
             .Include(c => c.IdProntuarioNavigation)
 
             // adiciona na busca as informações da consula que o medico vai realizar
-            .Include(c => c.IdMedicoNavigation)
+            .Include(c => c.IdProntuarioNavigation.Consulta)
 
             //Adiciona na busca o Medico e a sua especialidade
-            .Include(c => c.IdMedicoNavigation.IdEspecialidade)
+            .Include(c => c.IdProntuarioNavigation.Endereco)
 
             // Estabelece como parâmetro de consulta o ID do usuário recebido
             .Where(c => c.IdProntuarioNavigation.IdUsuario == id)
@@ -169,7 +205,7 @@ namespace senai_spmedical_be_webApi.Repositories
 
         public void MinhasConsultas(Consulta minhaConsulta)
         {
-            throw new NotImplementedException();
+            return ;
         }
     }
 }

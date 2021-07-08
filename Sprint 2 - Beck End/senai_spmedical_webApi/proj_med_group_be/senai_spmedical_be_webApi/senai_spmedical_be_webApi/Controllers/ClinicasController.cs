@@ -49,7 +49,7 @@ namespace senai_spmedical_be_webApi.Controllers
         /// </summary>
         /// <returns>retorna uma lista de clinicas e um status code 200</returns>
         /// http://localhost:5000/api/clinicas
-        //[Authorize(Roles = "1")]
+        [Authorize(Roles = "1")]
         [HttpGet]
         public IActionResult Get()
         {
@@ -73,6 +73,7 @@ namespace senai_spmedical_be_webApi.Controllers
         /// <param name="id">ID da clinica buscada</param>
         /// <returns>uma clinica encontrada e um statuscode 200</returns>
         [HttpGet("{id}")]
+        [Authorize(Roles = "1")]
         public IActionResult BuscarPorId(int id)
         {
             // tratamento de excessao
@@ -95,6 +96,7 @@ namespace senai_spmedical_be_webApi.Controllers
         /// <param name="novaClinica">objeto para cadastrar uma nica</param>
         /// <returns>retorna uma novva clinica</returns>
         [HttpPost]
+        [Authorize(Roles = "1")]
         public IActionResult Post(Clinica novaClinica)
         {
             // tratamento de excessao
@@ -120,6 +122,7 @@ namespace senai_spmedical_be_webApi.Controllers
         /// <param name="clinicaUpdate">objeto para atualizar uma clinica existente</param>
         /// <returns></returns>
         [HttpPut("{id}")]
+        [Authorize(Roles = "1")]
         public IActionResult Put(int id, Clinica clinicaUpdate)
         {
             // tratamento de excessao
@@ -149,6 +152,7 @@ namespace senai_spmedical_be_webApi.Controllers
         /// <param name="id">id da clincia deletada</param>
         /// <returns>retorna uma clinica existente deletada</returns>
         [HttpDelete("{id}")]
+        [Authorize(Roles = "1")]
         public IActionResult Del(int id)
         {
             //tratamento de excessão

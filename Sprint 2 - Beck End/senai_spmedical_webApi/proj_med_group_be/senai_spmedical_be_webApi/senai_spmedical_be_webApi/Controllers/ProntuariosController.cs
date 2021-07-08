@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using senai_spmedical_be_webApi.Domains;
 using senai_spmedical_be_webApi.Interfaces;
@@ -44,7 +45,7 @@ namespace senai_spmedical_be_webApi.Controllers
         /// </summary>
         /// <returns>Uma lIsta de prontuarios e um status code 200</returns>
         /// define que somento o ADM pode acessar o método
-        //[Authorize(Roles = "1")]
+        [Authorize(Roles = "1")]
         [HttpGet]
         public IActionResult Get()
         {
@@ -67,7 +68,7 @@ namespace senai_spmedical_be_webApi.Controllers
         /// <param name="id">ID da prontuario que será buscado</param>
         /// <returns>Um prontuario buscado e um status code 200 - Ok</returns>
         // Define que somente o administrador pode acessar o método
-        //[Authorize(Roles = "1")]
+        [Authorize(Roles = "1")]
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
@@ -89,7 +90,7 @@ namespace senai_spmedical_be_webApi.Controllers
         /// <param name="novoProntuario">Objeto novaProntuario que será cadastrada</param>
         /// <returns>Um status code 201 - Created</returns>
         // Define que somente o administrador pode acessar o método
-        //[Authorize(Roles = "1")]
+        [Authorize(Roles = "1")]
         [HttpPost]
         public IActionResult Post(Prontuario novoProntuario)
         {
@@ -114,7 +115,7 @@ namespace senai_spmedical_be_webApi.Controllers
         /// <param name="prontuarioUpdate">Objeto com as novas informações</param>
         /// <returns>Um status code 204 - No Content</returns>
         // Define que somente o administrador pode acessar o método
-        //[Authorize(Roles = "1")]
+        [Authorize(Roles = "1")]
         [HttpPut("{id}")]
         public IActionResult Put(int id, Prontuario prontuarioUpdate)
         {
@@ -138,7 +139,7 @@ namespace senai_spmedical_be_webApi.Controllers
         /// <param name="id">ID da prontuario que será deletado</param>
         /// <returns>Um status code 204 - No Content</returns>
         // Define que somente o administrador pode acessar o método
-        //[Authorize(Roles = "1")]
+        [Authorize(Roles = "1")]
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {

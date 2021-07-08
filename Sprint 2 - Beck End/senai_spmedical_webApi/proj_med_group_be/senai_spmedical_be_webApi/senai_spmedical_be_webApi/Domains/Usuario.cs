@@ -28,6 +28,6 @@ namespace senai_spmedical_be_webApi.Domains
 
         public virtual ICollection<Medico> Medicos { get; set; }
 
-        //public virtual ICollection<Prontuario> Prontuarios { get; set; }
+        public virtual ICollection<Prontuario> Prontuarios { get; set; }
     }
 }

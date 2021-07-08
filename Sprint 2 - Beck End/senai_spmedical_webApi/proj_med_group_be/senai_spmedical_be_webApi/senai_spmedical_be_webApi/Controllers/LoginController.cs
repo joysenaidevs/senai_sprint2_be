@@ -73,20 +73,20 @@ namespace senai_spmedical_be_webApi.Controllers
 
                 Usuario usuarioBuscado = _usuarioRepository.Login(login.Email , login.Senha);
 
-                //Prontuario prontuarioLogin = new Prontuario();
+                Prontuario prontuarioLogin = new Prontuario();
 
-                //Medico medicoLogin = new Medico();
+                Medico medicoLogin = new Medico();
 
 
-                //if (usuarioBuscado.IdTipoUsuario == 2)
-                //{
-                //    prontuarioLogin = _usuarioRepository.BuscarProntuarioId(usuarioBuscado.IdUsuario);
-                //}
+                if (usuarioBuscado.IdTipoUsuario == 2)
+                {
+                    prontuarioLogin = _usuarioRepository.BuscarProntuarioId(usuarioBuscado.IdUsuario);
+                }
 
-                //if (usuarioBuscado.IdTipoUsuario == 3)
-                //{
-                //    medicoLogin = _usuarioRepository.BuscarMedicoId(usuarioBuscado.IdUsuario);
-                //}
+                if (usuarioBuscado.IdTipoUsuario == 3)
+                {
+                    medicoLogin = _usuarioRepository.BuscarMedicoId(usuarioBuscado.IdUsuario);
+                }
 
                 // Caso não encontre nenhum usuário com o e-mail e senha informados
                 if (usuarioBuscado == null)
@@ -125,11 +125,11 @@ namespace senai_spmedical_be_webApi.Controllers
                     new Claim("role", usuarioBuscado.IdTipoUsuario.ToString()),
 
                     // Armazena na Claim o nome do usuário que foi autenticado
-                    new Claim(JwtRegisteredClaimNames.Name, usuarioBuscado.NomeUsuario),
+                   // new Claim(JwtRegisteredClaimNames.Name, usuarioBuscado.NomeUsuario),
 
-                    //new Claim("nomeProntuario", usuarioBuscado.IdTipoUsuario == 2 ? $"{prontuarioLogin.NomeProntuario}" : ""),
+                   new Claim("NomeProntuario", usuarioBuscado.IdTipoUsuario == 2 ? $"{prontuarioLogin.NomeProntuario}" : "" ),
 
-                    //new Claim("nomeMedico", usuarioBuscado.IdTipoUsuario == 3 ? $"{medicoLogin.NomeMedico}" : "")
+                    new Claim("NomeMedico", usuarioBuscado.IdTipoUsuario == 3 ? $"{medicoLogin.NomeMedico}" : "" )
                 };
 
                 // define o acesso ao token     gerando a chave

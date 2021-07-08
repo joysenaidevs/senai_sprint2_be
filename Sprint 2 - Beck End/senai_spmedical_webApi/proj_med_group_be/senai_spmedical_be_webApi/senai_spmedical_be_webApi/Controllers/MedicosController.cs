@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using senai_spmedical_be_webApi.Domains;
 using senai_spmedical_be_webApi.Interfaces;
@@ -44,6 +45,7 @@ namespace senai_spmedical_be_webApi.Controllers
         /// </summary>
         /// <returns>Lista de medicose statuscode 200 (Ok)</returns>
         [HttpGet]           // endpoint de listagem
+        [Authorize(Roles = "1")]
         public IActionResult Get()
         {
             //tratamento de excessões
@@ -64,6 +66,7 @@ namespace senai_spmedical_be_webApi.Controllers
         /// </summary>
         /// <param name="id">objeto que será buscado</param>
         /// <returns>retorna o medico buscado e status code 200</returns>
+        [Authorize(Roles = "1")]
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
@@ -85,6 +88,7 @@ namespace senai_spmedical_be_webApi.Controllers
         /// </summary>
         /// <param name="novoMedico">objeto novoMedico que será cadastrada</param>
         /// <returns>StatusCode 201 - Created</returns>
+        [Authorize(Roles = "1")]
         [HttpPost]
         public IActionResult Post(Medico novoMedico)
         {
@@ -112,6 +116,7 @@ namespace senai_spmedical_be_webApi.Controllers
         /// <param name="medicoAtualizado">objeto com as novas informacoes</param>
         /// <returns>status code 204 no content</returns>
         [HttpPut("{id}")]
+        [Authorize(Roles = "1")]
         public IActionResult Put(int id, Medico medicoAtualizado)
         {
             // tratamento de excessao
@@ -137,6 +142,7 @@ namespace senai_spmedical_be_webApi.Controllers
         /// <param name="id">id do medico que sera deletada</param>
         /// <returns>um statuscode 204</returns>
         [HttpDelete("{id}")]
+        [Authorize(Roles = "1")]
         public IActionResult Del(int id)
         {
             //tratamento de excessão
